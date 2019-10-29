@@ -12,7 +12,7 @@ import { FormfileComponent } from './formfile/formfile.component';
 import { QrcodeComponent } from './qrcode/qrcode.component';
 import { FormupComponent } from './formup/formup.component';
 import { InfoComponent } from './info/info.component';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +27,7 @@ import { InfoComponent } from './info/info.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

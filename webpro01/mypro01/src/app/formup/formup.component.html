@@ -1,11 +1,13 @@
-<div class="container">
+<div ng-app="MyApp" class="container">
     <h1 class="text-center">Update Classroom</h1>
-    <form>
-        <div class="form-group">
-          <label for="exampleFormControlFile1">Example file input</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    
+        <div ng-controller="myController" class="form-group">
+          <form enctype="multipart/form-data">
+            <input type="file" id="file">
+            <button type="submit" value="submit" ng-click="uploadExcel()">UploadExcel</button>
+          </form>
         </div>
-      </form>
+      
       <table class="table">
         <thead>
           <tr>

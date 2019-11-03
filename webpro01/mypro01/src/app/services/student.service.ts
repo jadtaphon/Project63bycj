@@ -12,8 +12,19 @@ export class StudentService {
 
   }
 
-   getStudent() {
+  getStudent() {
     return this.httpClient.get(`${this.apiURL}/getCourse`);
+  }
+  createCourse(){
+    return this.httpClient.post(`${this.apiURL}/ceate-course`,{
+        
+    });
+  }
+  uploadStudent(course:any,times:any){
+    return this.httpClient.post(`${this.apiURL}/upload`,{
+      course_id:course,
+      time:times
+    });
   }
   deleteCourse(id : any){
     return this.httpClient.delete(`${this.apiURL}/deleteCourse/${id}`);

@@ -19,21 +19,13 @@ export class QrcodeComponent implements OnInit {
             quality: 0.3
         }
       }
-QRCode.toDataURL('text', opts, function (err, url) {
-  if (err) throw err
-  var img = document.getElementById('image');
-  img.setAttribute('src',url);
-  console.log(img);
-  
-})
-// const generateQR = async text => {
-//           try {
-//             console.log(await QRCode.toDataURL(text))
-//           } catch (err) {
-//             console.error(err)
-//           }
-//           }
-  
+      QRCode.toDataURL('jadtaphon.github.io', opts, function (err, url) {
+        if (err) throw err
+        var img = document.getElementById('image');
+        img.setAttribute('src',url);
+        console.log(img);
+        
+      })
   }
   qrcode(){
     this.router.navigate(['info'])

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router'
 import QRCode from 'qrcode'
+import { Router, ActivatedRoute  } from '@angular/router'
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-qrcode',
@@ -8,10 +9,11 @@ import QRCode from 'qrcode'
   styleUrls: ['./qrcode.component.scss']
 })
 export class QrcodeComponent implements OnInit {
-  
-  constructor(private router: Router) { }
+  course : any;
+  constructor(private router: Router,private studentService:StudentService,private route:ActivatedRoute  ) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
     let opts = {
         errorCorrectionLevel: 'H',
         type: 'image/jpeg',
@@ -19,16 +21,23 @@ export class QrcodeComponent implements OnInit {
             quality: 0.3
         }
       }
-      QRCode.toDataURL('jadtaphon.github.io', opts, function (err, url) {
+      QRCode.toDataURL('http://10.0.0.28:4200/student/', opts, function (err, url) {
         if (err) throw err
         var img = document.getElementById('image');
         img.setAttribute('src',url);
-        console.log(img);
-        
       })
+
+      
+        this.studentService.reportCourse(params.get('id')).subscribe(
+          (data)=>{
+            this.course=data[0];
+            console.log(this.course);
+          }
+        )
+    });
   }
-  qrcode(){
-    this.router.navigate(['info'])
+  qrcode(id:any){
+    this.router.navigate(['info/'+id])
   }
 
 }

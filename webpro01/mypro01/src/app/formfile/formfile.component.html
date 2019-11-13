@@ -4,16 +4,17 @@
 
   <div class="form-group">
     <input class="btn btn-info " type="file" (change)="onFileChange($event)" multiple="false" />
-    <div class="text-center">
-      <div class="col-3 container">
-          <hr>
+    <div>
+      <div class="col-6 container">
+        <hr>
       </div>
-      <p>{{course}}</p>
-      <p>{{time}}</p>
+      <p>รหัสวิชา :{{course_id}}</p>
+      <p>ชื่อวิชา : {{course_name}}</p>
+      <p>วันเวลาเรียน : {{time}}</p>
     </div>
-    
+
     <button class="btn btn-success " (click)="upload()">Upload!</button>
-<hr>
+    <hr>
     <table class="table">
       <thead>
         <tr>
@@ -24,9 +25,9 @@
       </thead>
       <tbody *ngFor="let s of student">
         <tr>
-          <th>{{s[0]}}</th>
-          <td>{{s[1]}}</td>
-          <td>{{s[2]}}</td>
+          <th>{{s.number}}</th>
+          <td>{{s.id_student}}</td>
+          <td>{{s.name}}</td>
         </tr>
       </tbody>
     </table>

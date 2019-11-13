@@ -18,7 +18,6 @@ export class CardComponent implements OnInit {
     });
   }
   delete(id:any){
-    console.log(id);
      this.studentService.deleteCourse(id).subscribe(
      ()=>{
        console.log(id);
@@ -31,15 +30,15 @@ export class CardComponent implements OnInit {
 
 
   }
-  pageqr() {
+  pageqr(id:any) {
 
-    this.router.navigate(['qrcode'])
+    this.router.navigate(['qrcode/'+id])
   }
   pageup() {
     this.router.navigate(['update'])
   }
-  pageinfo() {
-    this.router.navigate(['info'])
+  pageinfo(id:any) {
+     this.router.navigate(['info/'+id])
   }
  
 

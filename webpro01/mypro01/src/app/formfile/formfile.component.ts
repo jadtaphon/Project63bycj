@@ -16,11 +16,11 @@ export class FormfileComponent implements OnInit {
   wss: any
 
   student: any[][] = [[]];
-  course: any;
+  course : any;
+  course_id: any;
+  course_name: any;
+  classroom:any;
   time: any;
-  students: any[][] = [[]];
-
-
 
   constructor(private router: Router, private studentService: StudentService) { }
 
@@ -47,38 +47,39 @@ export class FormfileComponent implements OnInit {
       this.time = ws.B6.w;
       for (let i = 9; i <= this.data.length - 3; i++) {
         this.student[i - 9] = this.data[i];
-        //  for (let j = 1; j <= 3; j++) {
-        //  this.student[i-9][j-1]= this.data[i][j];
-        // //   //console.log(this.student[i - 9]);
+        for (let j = 1; j <= 3; j++) {
+          this.student[i - 9]['number'] = this.data[i][1];
+          this.student[i - 9]['id_student'] = this.data[i][2];
+          this.student[i - 9]['name'] = this.data[i][3];
 
-        // //   //console.log(this.data[i][j]);
-
-        //  }
+        }
+        this.student[i - 9].splice(0)
       }
+    this.course_id = this.course.substr(10,7);
+    this.course_name=this.course.substr(19);
+    this.time=this.time.substr(13);
     };
-    reader.readAsBinaryString(target.files[0]);
+   return reader.readAsBinaryString(target.files[0]);
+
+    
   }
 
   upload() {
-    for (let i; i < this.student.length; i++) {
-      for (let j = 1; j < 4; j++) {
-        this.students = this.students[i][j]
-      }
+    var data =[];
+
+    for (var key in this.student) {
+        
+          data.push({
+                'number_id': this.student[key]['number'],
+                'id_student': this.student[key]['id_student'],
+                'name': this.student[key]['name']
+            });
+        
     }
-
-    console.log(this.students);
+    this.studentService.uploadStudent(this.course_id,this.course_name, this.time, data).subscribe(
+      () => {
+        this.router.navigate(['/'])
+      }
+    )
   }
-
-
-  // this.studentService.uploadStudent(this.course,this.time).subscribe(
-  //   (data)=>{
-  //     console.log(data);
-  //   }
-  // )
-  // for (let i = 0; i <this.student.length; i++) {
-  //   console.log(this.student[i]);
-  // }
-  //this.router.navigate([''])
-
-
 }

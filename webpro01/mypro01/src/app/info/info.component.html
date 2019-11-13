@@ -1,24 +1,31 @@
-<div class="container">
-    <h1 class="text-center">Classroom Info</h1>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr >
-            <th scope="row">1</th>
-            <td>ddd</td>
-            <td>ddd</td>
-            <td>ddd</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="text-right">
-        <a class="btn btn-primary" (click)="back()" >กลับ</a>
-    </div>
+<div class="container" *ngIf="course">
+  <h1 class="text-center">Classroom Info</h1>
+  <p>รหัสวิชา : {{course.course_id}}</p>
+  <p>ชื่อวิชา : {{course.course_name}}</p>
+  <p>เวลา : {{course.time}}</p>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">เลขที่</th>
+        <th scope="col">รหัสนักศึกษา</th>
+        <th scope="col" class="text-center">ชื่อ</th>
+        <th colspan="16" class="text-center" >สัปดาห์</th> 
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of course.students">
+        <td>{{s.number_id}}</td>
+        <td>{{s.id_student}}</td>
+        <td>{{s.name}}</td>
+        <td *ngFor="let w of s.weeks | keyvalue" style="padding: 0.05rem;">
+          <span >{{w.value}}</span>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <div class="text-right">
+    <a class="btn btn-primary" (click)="back()" style="color: white;">กลับ</a>
+  </div>
+  <br>
 </div>

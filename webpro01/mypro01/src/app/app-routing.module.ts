@@ -11,9 +11,9 @@ import { FromstusentComponent } from "./fromstusent/fromstusent.component";
 const routes: Routes = [
   { path: '', component: CardhomeComponent },
   { path: 'form', component: FormfileComponent },
-  { path: 'qrcode', component: QrcodeComponent },
+  { path: 'qrcode/:id', component: QrcodeComponent },
   { path: 'update', component: FormupComponent },
-  { path: 'info', component: InfoComponent },
+  { path: 'info/:id', component: InfoComponent },
   { path: 'student', component: FromstusentComponent }
 ];
 

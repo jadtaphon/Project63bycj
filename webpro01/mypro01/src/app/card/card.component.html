@@ -8,23 +8,22 @@
           </a>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <a ngbDropdownItem (click)="pageup()">อัพเดทชื่อ</a>
-            <a ngbDropdownItem (click)="pageinfo()">ประวัติ</a>
+            <a ngbDropdownItem (click)="pageinfo(c.id)">ประวัติ</a>
           </div>
         </div>
       </div>
     </div>
     <div class="card-body">
       <div class="row container">
-        <div class="col-md-6">
-           <h5 class="card-title">รหัสวิชา : {{c.course_id}} <br> ชื่อวิชา : {{c.coursename}} </h5>
+        <div class="col-md-12">
+           <h5 class="card-title">รหัสวิชา : {{c.course_id}} <br> ชื่อวิชา : {{c.course_name}} </h5>
            <p class="card-text">เวลาเริ่มสอน : {{c.time}}</p>
         </div>
-        <div class="col-md-6 ">ห้องเรียน : {{c.classroom}} <br>ผู้สอน :{{c.teacher}} </div>
       </div>
       <br>
       <div class="row">
         <div class="col-md-3">
-           <a class="btn btn-success btn-block" (click)="pageqr()" style="color:white;">QRcode</a>
+           <a class="btn btn-success btn-block" (click)="pageqr(c.id)" style="color:white;">QRcode</a>
         </div>
         <div class="col-md-3"><a class="btn btn-info btn-block" (click)="pageinfo()" style="color:white;">รายละเอียด</a></div>
         <div class="col-md-6 text-right">

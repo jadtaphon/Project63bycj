@@ -1,0 +1,46 @@
+<div class="container">
+  <h1 class="text-center">Start QRcode</h1>
+  <div class="col-md-6 container">
+  <select #weeks name="weeks" id="">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+  </select>
+  <button (click)="student(weeks.value)">student</button>
+  
+  
+    <img src="" id="image" alt="" width="100%">
+  </div>
+  
+  <button (click)="qrcode()">ปิด</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">เลขที่</th>
+        <th scope="col">รหัสนักศึกษา</th>
+        <th scope="col">ชื่อ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>1234567890</td>
+        <td>Otto</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div></div>

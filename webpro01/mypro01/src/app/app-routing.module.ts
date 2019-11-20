@@ -6,6 +6,7 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
 import { FormupComponent } from './formup/formup.component';
 import { InfoComponent } from './info/info.component';
 import { FromstusentComponent } from "./fromstusent/fromstusent.component";
+import { InfonameComponent } from './infoname/infoname.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'qrcode/:id', component: QrcodeComponent },
   { path: 'update', component: FormupComponent },
   { path: 'info/:id', component: InfoComponent },
-  { path: 'student', component: FromstusentComponent }
+  { path: 'student/:id', component: FromstusentComponent },
+  { path: 'infoname/:id', component: InfonameComponent }
 ];
 
 @NgModule({

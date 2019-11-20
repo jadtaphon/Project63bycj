@@ -15,6 +15,7 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
 import { FormupComponent } from './formup/formup.component';
 import { InfoComponent } from './info/info.component';
 import { FromstusentComponent } from './fromstusent/fromstusent.component';
+import { InfonameComponent } from './infoname/infoname.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FromstusentComponent } from './fromstusent/fromstusent.component';
     FormupComponent,
     InfoComponent,
     FromstusentComponent,
+    InfonameComponent,
   ],
   imports: [
     BrowserModule,

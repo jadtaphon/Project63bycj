@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute  } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { StudentService } from '../services/student.service';
 import { Student } from '../models/student';
 
@@ -10,28 +10,31 @@ import { Student } from '../models/student';
 })
 export class InfoComponent implements OnInit {
 
+  course: object
+  week: any;
 
-  course : object
-  count:any;
-  
-
-  constructor(private router: Router,private studentService:StudentService,private route:ActivatedRoute ) { }
+  constructor(private router: Router, private studentService: StudentService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.count=Array(16);
     this.route.paramMap.subscribe(params => {
-        this.studentService.reportCourse(params.get('id')).subscribe(
-          (data)=>{
-            this.course=data[0];
-            console.log(this.course);
-            
-          }
-        )
-     
+      this.studentService.reportCourse(params.get('id')).subscribe(
+        (data) => {
+          this.course = data[0];
+        }
+      )
     });
   }
-  back(){
+  back() {
     this.router.navigate([''])
+  }
+
+
+  getTotal(data){
+    let total = 0;
+    for(let i = 1; i <= 16; i++){
+      total += data["week"+i];
+  }
+  return total;
   }
 
 }

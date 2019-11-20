@@ -5,22 +5,28 @@
   <p>เวลา : {{course.time}}</p>
   <table class="table table-bordered">
     <thead>
-      <tr>
-        <th scope="col">เลขที่</th>
-        <th scope="col">รหัสนักศึกษา</th>
-        <th scope="col" class="text-center">ชื่อ</th>
-        <th colspan="16" class="text-center" >สัปดาห์</th> 
+      <tr class="text-center">
+        <th scope="col" >เลขที่</th>
+        <th scope="col" >รหัสนักศึกษา</th>
+        <th scope="col" >ชื่อ</th>
+        <th colspan="16" >สัปดาห์</th>
+        <th scope="col" >รวม</th>
       </tr>
+      
     </thead>
     <tbody>
       <tr *ngFor="let s of course.students">
-        <td>{{s.number_id}}</td>
+        <td class="text-center">{{s.number_id}}</td>
         <td>{{s.id_student}}</td>
         <td>{{s.name}}</td>
-        <td *ngFor="let w of s.weeks | keyvalue" style="padding: 0.05rem;">
-          <span >{{w.value}}</span>
+        <td *ngFor="let w of s.weeks | keyvalue" style="padding: 0.50rem;" class="text-center">
+          <span>{{w.value}}</span>
         </td>
+        <td class="text-center">{{ getTotal(s.weeks) }}</td>
       </tr>
+     
+      
+      
 
     </tbody>
   </table>

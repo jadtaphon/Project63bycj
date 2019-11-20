@@ -40,6 +40,9 @@ export class CardComponent implements OnInit {
   pageinfo(id:any) {
      this.router.navigate(['info/'+id])
   }
+  pageinfoname(id:any){
+    this.router.navigate(['infoname/'+id])
+  }
  
 
 }

@@ -37,7 +37,8 @@
               "node_modules/popper.js/dist/popper.min.js",
               "node_modules/angular/angular.min.js",
               "node_modules/angular-js-xlsx/angular-js-xlsx.js",
-              "node_modules/xlsx/dist/xlsx.full.min.js"
+              "node_modules/xlsx/dist/xlsx.full.min.js",
+              "node_modules/address/lib/address.js"
             ]
           },
           "configurations": {

@@ -1,0 +1,35 @@
+<div class="container">
+  <h1 class="text-center">New Classroom</h1>
+  <hr>
+
+  <div class="form-group">
+    <input class="btn btn-info " type="file" (change)="onFileChange($event)" multiple="false" />
+    <div>
+      <div class="col-6 container">
+        <hr>
+      </div>
+      <p>รหัสวิชา :{{course_id}}</p>
+      <p>ชื่อวิชา : {{course_name}}</p>
+      <p>วันเวลาเรียน : {{time}}</p>
+    </div>
+
+    <button class="btn btn-success " (click)="upload()">Upload!</button>
+    <hr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">เลขที่</th>
+          <th scope="col">รหัสนักศึกษา</th>
+          <th scope="col">ชื่อ-นานสกุล</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let s of student">
+        <tr>
+          <th>{{s.number}}</th>
+          <td>{{s.id_student}}</td>
+          <td>{{s.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>

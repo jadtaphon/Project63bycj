@@ -49,5 +49,6 @@ func main() {
 	e.POST("/upload", h.uploadCourse)
 	e.POST("/chackname/:id", h.checkIn)
 	e.GET("/getIP", h.getIP)
+	e.GET("/getMacAddr", h.getMacAddr)
 	e.Logger.Fatal(e.Start(":8080"))
 }

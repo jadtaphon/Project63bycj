@@ -103,3 +103,20 @@ func (h *Handler) report(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, users)
 }
+
+///////////////////////////////////////
+func (h *Handler) getMacAddr(c echo.Context) error {
+	ifas, err := net.Interfaces()
+	if err != nil {
+		return c.JSON(http.StatusOK, err)
+	}
+	var addr []string
+	for _, ifa := range ifas {
+		a := ifa.HardwareAddr.String()
+		if a != "" {
+			addr = append(addr, a)
+		}
+	}
+	return c.JSON(http.StatusOK, addr)
+	//return as, nil
+}

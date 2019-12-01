@@ -26,6 +26,9 @@ export class InfonameComponent implements OnInit {
   back(){
     this.router.navigate([''])
   }
+  retest(data){
+    return data.week
+  }
 
 
 }

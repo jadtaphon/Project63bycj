@@ -15,9 +15,7 @@ export class StudentService {
         this.api='http://'+data.toString()+':8080';
       }
     )
-    console.log(this.api);
-    
-    this.apiURL = 'http://192.168.137.1:8080';
+    this.apiURL = 'http://10.0.1.44:8080';
   }
 
   getStudent() {

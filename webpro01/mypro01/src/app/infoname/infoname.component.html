@@ -1,5 +1,5 @@
 <div class="container" *ngIf="course">
-    <h1 class="text-center">Classroom Info</h1>
+    <h1 class="text-center">Classroom record</h1>
     <p>รหัสวิชา : {{course.course_id}}</p>
     <p>ชื่อวิชา : {{course.course_name}}</p>
     <p>เวลา : {{course.time}}</p>
@@ -18,7 +18,7 @@
           <td>{{s.id_student}}</td>
           <td>{{s.name}}</td>
           <td *ngFor="let w of s.weeks | keyvalue" style="padding: 0.05rem;" class="text-center">
-            <span >{{w.value}}</span>
+            <span >{{retest(w.value)}}</span>
           </td>
          
         </tr>

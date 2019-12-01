@@ -20,25 +20,29 @@
     <option value="16">16</option>
   </select>
   <button (click)="student(weeks.value)">student</button>
-  
-  
     <img src="" id="image" alt="" width="100%">
   </div>
-  
-  <button (click)="qrcode()">ปิด</button>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">เลขที่</th>
-        <th scope="col">รหัสนักศึกษา</th>
-        <th scope="col">ชื่อ</th>
+  <button (click)="back()">ปิด</button>
+  <button (click)="refresh(weeks.value)">refresh</button>
+  <div class="text-center">
+      <p >{{contcome}}/{{cont}}</p>
+    </div>
+  <table class="table table-bordered">
+    <thead >
+      <tr class="text-center">
+        <th scope="col" >เลขที่</th>
+        <th scope="col" >รหัสนักศึกษา</th>
+        <th scope="col" >ชื่อ</th>
+        <th scope="col" >คะแนน</th>
+        
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>1234567890</td>
-        <td>Otto</td>
+      <tr *ngFor="let s of showstudent" >
+          <td class="text-center">{{s.number_id}}</td>
+          <td class="text-center">{{s.id_student}}</td>
+          <td>{{s.name}}</td>
+          <td class="text-center">{{ getTotal(s.weeks) }}</td>
       </tr>
     </tbody>
   </table>

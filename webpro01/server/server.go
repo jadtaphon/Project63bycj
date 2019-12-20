@@ -48,7 +48,11 @@ func main() {
 	e.DELETE("/deleteCourse/:id", h.deleteCourse)
 	e.POST("/upload", h.uploadCourse)
 	e.POST("/chackname/:id", h.checkIn)
+	e.POST("/chacknameT/:id", h.checknameT)
 	e.GET("/getIP", h.getIP)
-	e.GET("/getMacAddr", h.getMacAddr)
-	e.Logger.Fatal(e.Start(":8080"))
+	e.POST("/addupstudent/:id", h.addupstudent)
+	e.POST("/editstudent/:id", h.editstudent)
+	e.POST("/deletestudent/:id", h.deletestudent)
+	//e.GET("/getMacAddr", h.getMacAddr)
+	e.Logger.Fatal(e.Start(ip + ":443"))
 }

@@ -37,11 +37,7 @@ type (
 		Week16 Active `json:"week16" bson:"week16"`
 	}
 	Active struct {
-		Weeks    int    `json:"week" bson:"week"`
-		Idactive string `json:"id_active" bson:"id_active"`
+		Weeks    float32 `json:"week" bson:"week"`
+		Idactive string  `json:"id_active" bson:"id_active"`
 	}
 )
-
-// var (
-// 	Courses = map[string]*Course{}
-// )

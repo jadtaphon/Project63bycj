@@ -7,7 +7,7 @@
             เพิ่มเติม
           </a>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <a ngbDropdownItem (click)="pageup()">อัพเดทชื่อ</a>
+            <a ngbDropdownItem (click)="pageup(c.id)">อัพเดทชื่อ</a>
             <a ngbDropdownItem (click)="pageinfoname(c.id)">ประวัติ</a>
           </div>
         </div>
@@ -25,9 +25,9 @@
         <div class="col-md-3">
            <a class="btn btn-success btn-block" (click)="pageqr(c.id)" style="color:white;">QRcode</a>
         </div>
-        <div class="col-md-3"><a class="btn btn-info btn-block" (click)="pageinfo(c.id)" style="color:white;">รายละเอียด</a></div>
+        <div class="col-md-3"><a class="btn btn-info btn-block" (click)="pageinfo(c.id)" style="color:white;">จัดการนักศึกษา</a></div>
         <div class="col-md-6 text-right">
-            <a (click)="delete(c.id)" href="" class="btn btn-danger" style="color:white;">ลบ</a>
+            <a (click)="delete(c.id)" class="btn btn-danger" style="color:white;">ลบ</a>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', component: CardhomeComponent },
   { path: 'form', component: FormfileComponent },
   { path: 'qrcode/:id', component: QrcodeComponent },
-  { path: 'update', component: FormupComponent },
+  { path: 'update/:id', component: FormupComponent },
   { path: 'info/:id', component: InfoComponent },
   { path: 'student/:id', component: FromstusentComponent },
   { path: 'infoname/:id', component: InfonameComponent }

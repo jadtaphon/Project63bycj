@@ -12,6 +12,7 @@ import (
 
 	"github.com/labstack/echo"
 
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -44,8 +45,6 @@ func (h *Handler) getAllCourse(c echo.Context) (err error) {
 	defer db.Close()
 	return c.JSON(http.StatusOK, users)
 }
-
-/////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
 func (h *Handler) deleteCourse(c echo.Context) (err error) {
@@ -89,7 +88,82 @@ func (h *Handler) uploadCourse(c echo.Context) (err error) {
 
 }
 
-///////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+func (h *Handler) addupstudent(c echo.Context) error {
+	u := new(Sutdent)
+	id := c.Param("id")
+
+	if err := c.Bind(u); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+	db := h.DB.Clone()
+	defer db.Close()
+
+	if err := db.DB("test").C("course").
+		UpdateId(bson.ObjectIdHex(id), bson.M{"$addToSet": bson.M{"students": u}}); err != nil {
+		if err == mgo.ErrNotFound {
+			return echo.ErrNotFound
+		}
+		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	return c.JSON(http.StatusOK, u)
+}
+
+//////////////////////////////////////////////////////////////////////
+func (h *Handler) deletestudent(c echo.Context) error {
+	u := new(Sutdent)
+	if err := c.Bind(u); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+	db := h.DB.Clone()
+	defer db.Close()
+
+	id := c.Param("id")
+	query := bson.M{"_id": bson.ObjectIdHex(id)}
+	//update := bson.M{"$pull": bson.M{"students.id_student": u.Idstudent}}
+	update := bson.M{"$pull": bson.M{"students": bson.M{"id_student": u.Idstudent}}}
+
+	err := db.DB("test").C("course").Update(query, update)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+	return c.JSON(http.StatusOK, u)
+}
+
+//////////////////////////////////////////////////////////////////////
+func (h *Handler) editstudent(c echo.Context) error {
+	u := new(Sutdent)
+	id := c.Param("id")
+
+	if err := c.Bind(u); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+	db := h.DB.Clone()
+	defer db.Close()
+
+	// if err := db.DB("test").C("course").
+	// 	UpdateId(bson.ObjectIdHex(id), bson.M{"$addToSet": bson.M{"students": u}}); err != nil {
+	// 	if err == mgo.ErrNotFound {
+	// 		return echo.ErrNotFound
+	// 	}
+	// 	return c.JSON(http.StatusBadRequest, err)
+	// }
+	query := bson.M{"_id": bson.ObjectIdHex(id), "students.id_student": u.Idstudent}
+	update := bson.M{
+		"$set": bson.M{
+			"students.$": u,
+		},
+	}
+
+	err := db.DB("test").C("course").Update(query, update)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+	return c.JSON(http.StatusOK, u.Idstudent)
+}
+
+//////////////////////////////////////////////////////////////////////
 func (h *Handler) report(c echo.Context) error {
 	users := []*Course{}
 	db := h.DB.Clone()
@@ -104,19 +178,21 @@ func (h *Handler) report(c echo.Context) error {
 	return c.JSON(http.StatusOK, users)
 }
 
-///////////////////////////////////////
-func (h *Handler) getMacAddr(c echo.Context) error {
-	ifas, err := net.Interfaces()
-	if err != nil {
-		return c.JSON(http.StatusOK, err)
-	}
-	var addr []string
-	for _, ifa := range ifas {
-		a := ifa.HardwareAddr.String()
-		if a != "" {
-			addr = append(addr, a)
-		}
-	}
-	return c.JSON(http.StatusOK, addr)
-	//return as, nil
-}
+/////////////////////////////////////////////////////////////////////
+// func (h *Handler) getMacAddr(c echo.Context) error {
+// 	ifas, err := net.Interfaces()
+// 	if err != nil {
+// 		return c.JSON(http.StatusOK, err)
+// 	}
+// 	var addr []string
+// 	for _, ifa := range ifas {
+// 		a := ifa.HardwareAddr.String()
+// 		if a != "" {
+// 			addr = append(addr, a)
+// 		}
+// 	}
+// 	return c.JSON(http.StatusOK, addr)
+// 	//return as, nil
+// }
+
+///////////////////////////////////////////////////////////////

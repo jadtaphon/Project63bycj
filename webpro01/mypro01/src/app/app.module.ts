@@ -16,9 +16,11 @@ import { FormupComponent } from './formup/formup.component';
 import { InfoComponent } from './info/info.component';
 import { FromstusentComponent } from './fromstusent/fromstusent.component';
 import { InfonameComponent } from './infoname/infoname.component';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 @NgModule({
   declarations: [
+    
     AppComponent,
     CardhomeComponent,
     TopbarComponent,
@@ -31,6 +33,7 @@ import { InfonameComponent } from './infoname/infoname.component';
     InfonameComponent,
   ],
   imports: [
+    NgxQRCodeModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,HttpClientModule

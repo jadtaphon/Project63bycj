@@ -11,16 +11,18 @@ export class CardComponent implements OnInit {
   constructor(private router: Router, private studentService: StudentService) { }
 
   ngOnInit() {
-    this.studentService.getStudent().subscribe((res) => {
+    this.studentService.getStudent().subscribe(
+      (res) => {
       this.course = res
-      
-
     });
   }
   delete(id:any){
      this.studentService.deleteCourse(id).subscribe(
      ()=>{
-       console.log(id);
+      this.studentService.getStudent().subscribe(
+        (res) => {
+        this.course = res
+      });
        }
      )
     
@@ -34,8 +36,8 @@ export class CardComponent implements OnInit {
 
     this.router.navigate(['qrcode/'+id])
   }
-  pageup() {
-    this.router.navigate(['update'])
+  pageup(id :any) {
+    this.router.navigate(['update/'+id])
   }
   pageinfo(id:any) {
      this.router.navigate(['info/'+id])

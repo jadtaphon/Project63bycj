@@ -66,15 +66,12 @@ export class FormfileComponent implements OnInit {
 
   upload() {
     var data =[];
-
     for (var key in this.student) {
-        
           data.push({
                 'number_id': this.student[key]['number'],
                 'id_student': this.student[key]['id_student'],
                 'name': this.student[key]['name']
             });
-        
     }
     this.studentService.uploadStudent(this.course_id,this.course_name, this.time, data).subscribe(
       () => {

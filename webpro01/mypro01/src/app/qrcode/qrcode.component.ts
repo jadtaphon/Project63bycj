@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { StudentService } from '../services/student.service';
 import { interval, Subscription } from 'rxjs';
-//import { mergeMap } from 'rxjs/operators';
+
 
 
 @Component({

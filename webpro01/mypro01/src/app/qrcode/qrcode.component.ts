@@ -49,8 +49,8 @@ export class QrcodeComponent implements OnInit {
     this.weeks = week;
     const source = interval(1000);
 
-    this.re()
-    this.subscription = source.subscribe(val => this.re());
+    this.qruery()
+    this.subscription = source.subscribe(val => this.qruery());
 
     this.qrcode()
     this.show = false;
@@ -61,7 +61,7 @@ export class QrcodeComponent implements OnInit {
     this.qrcode_url = 'http://' + this.ip + ':80/student/' + this.idcoure + ',' + this.weeks;
   }
   /////////////////////////////////
-  re() {
+  qruery() {
     console.log('1');
 
     this.studentService.reportCourse(this.idcoure).subscribe((data) => {

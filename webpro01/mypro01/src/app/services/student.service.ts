@@ -38,11 +38,12 @@ export class StudentService {
     Data.append("week", weeks);
     return this.httpClient.post(`${this.apiURL}/chacknameT/${id}`, Data);
   }
-  uploadStudent(course_id: any, course_names: any, times: any, student: any) {
+  uploadStudent(course_id: any, course_names: any, times: any,sesons:any, student: any) {
     return this.httpClient.post(`${this.apiURL}/upload`, {
       course_id: course_id,
       course_name: course_names,
       time: times,
+      seson:sesons,
       students: student
     });
   }

@@ -11,20 +11,22 @@ import { StudentService } from "../services/student.service"
 export class FormfileComponent implements OnInit {
 
   data: any
-  wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
-  fileName: string = 'SheetJS.xlsx';
+  //wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
+  //fileName: string = 'SheetJS.xlsx';
   wss: any
 
   student: any[][] = [[]];
+  nameT: any;
   course : any;
   course_id: any;
   course_name: any;
-  classroom:any;
+  //classroom:any;
   time: any;
 
   constructor(private router: Router, private studentService: StudentService) { }
 
   ngOnInit() {
+    
   }
   onFileChange(evt: any) {
     /* wire up file reader */
@@ -60,11 +62,9 @@ export class FormfileComponent implements OnInit {
     this.time=this.time.substr(13);
     };
    return reader.readAsBinaryString(target.files[0]);
-
-    
   }
 
-  upload() {
+  upload(seson:number) {
     var data =[];
     for (var key in this.student) {
           data.push({
@@ -73,10 +73,16 @@ export class FormfileComponent implements OnInit {
                 'name': this.student[key]['name']
             });
     }
-    this.studentService.uploadStudent(this.course_id,this.course_name, this.time, data).subscribe(
-      () => {
-        this.router.navigate(['/'])
-      }
-    )
+    if (localStorage.getItem('name')!=null) {
+      this.nameT=localStorage.getItem('name');
+      this.studentService.uploadStudent(this.course_id,this.course_name,this.time,seson, data).subscribe(
+        () => {
+          this.router.navigate(['/'])
+        }
+      )
+    }else{
+      alert('ยังไม่มีชื่ออาจารย์')
+    }
+    
   }
 }

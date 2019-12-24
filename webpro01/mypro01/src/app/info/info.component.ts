@@ -39,16 +39,16 @@ export class InfoComponent implements OnInit {
     this.twee = weeks;
     console.log(this.twee);
   }
-  
+
   chackbyTcome(idstudent: any, count: number) {
     this.studentService.chakname(this.idcoure, idstudent, this.twee).subscribe(
       () => {
-         console.log("เข้ายุ");
+        console.log("เข้ายุ");
         this.studentService.reportCourse(this.idcoure).subscribe(
           (data) => {
             this.course = data[0];
           });
-       
+
         // $(document).ready(function(){
         //   location.reload();
         //   });
@@ -64,7 +64,7 @@ export class InfoComponent implements OnInit {
           (data) => {
             this.course = data[0];
           });
-       // window.location.reload();
+        // window.location.reload();
       }
     )
   }

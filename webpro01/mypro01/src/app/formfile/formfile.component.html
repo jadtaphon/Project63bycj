@@ -1,19 +1,27 @@
 <div class="container">
   <h1 class="text-center">New Classroom</h1>
   <hr>
-
   <div class="form-group">
     <input class="btn btn-info " type="file" (change)="onFileChange($event)" multiple="false" />
     <div>
       <div class="col-6 container">
+        <div class="text-right">
+          <select #seson name="seson" id="">
+            <option selected>เลือกเทอม</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
         <hr>
       </div>
       <p>รหัสวิชา :{{course_id}}</p>
       <p>ชื่อวิชา : {{course_name}}</p>
       <p>วันเวลาเรียน : {{time}}</p>
     </div>
-
-    <button class="btn btn-success " (click)="upload()">Upload!</button>
+    <div class="text-right">
+      <button class="btn btn-success " (click)="upload(seson.value)">Upload!</button>
+    </div>
     <hr>
     <table class="table">
       <thead>
@@ -31,5 +39,4 @@
         </tr>
       </tbody>
     </table>
-
   </div>

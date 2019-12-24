@@ -8,9 +8,14 @@ import { Router } from '@angular/router'
 })
 export class TopbarComponent implements OnInit {
   //subscription: Subscription;
+ nameT:any;
   constructor(private router: Router) { }
 
   ngOnInit() {
+    
+    if (localStorage.getItem('name')!=null) {
+      this.nameT=localStorage.getItem('name')
+    }
   }
   // homeage(){
   //   this.router.navigate(['']);

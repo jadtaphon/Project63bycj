@@ -10,6 +10,7 @@ type (
 		CourseID   string        `json:"course_id" bson:"course_id"`
 		CourseName string        `json:"course_name" bson:"course_name"`
 		Day_Time   string        `json:"time" bson:"time"`
+		Seson      string        `json:"seson" bson:"seson"`
 		Sutdents   []Sutdent     `json:"students" bson:"students"`
 	}
 	Sutdent struct {

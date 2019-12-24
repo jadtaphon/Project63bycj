@@ -11,6 +11,8 @@
       <br>
       <br>
       <button class="btn btn-success" (click)="downloadfile()">Download File</button>
+      <button class="btn btn-secondary" (click)="showsumfile(content)">รวมคะแนน</button>
+
     </div>
   </div>
   <table class="table table-bordered">
@@ -30,9 +32,7 @@
         <td *ngFor="let w of s.weeks | keyvalue" style="padding: 0.05rem;" class="text-center">
           <span>{{retest(w.value)}}</span>
         </td>
-
       </tr>
-
     </tbody>
   </table>
   <div class="text-right">
@@ -40,3 +40,38 @@
   </div>
   <br>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input class="btn btn-info " type="file" (change)="readfile($event)" multiple="false" />
+    <p>รวมคะแนน&hellip;</p>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">เลขที่</th>
+          <th scope="col" class="text-center">รหัสนักศึกษา</th>
+          <th scope="col" class="text-center">ชื่อ</th>
+          <th colspan="16" class="text-center">คะแนนรวม</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of dataStrings">
+          <td class="text-center">{{s.number_id}}</td>
+          <td>{{s.id_student}}</td>
+          <td>{{s.name}}</td>
+          <td>{{getscore(s)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light">save</button>
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

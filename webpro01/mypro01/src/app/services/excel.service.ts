@@ -3,12 +3,12 @@ import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-const EXCEL_EXTENSION = '.xlsx';
+//const EXCEL_EXTENSION = '.xlsx';
 @Injectable({
   providedIn: 'root'
 })
 export class ExcelService {
-
+  
   constructor() { }
   exportAsExcelFile(json: any[], excelFileName: string): void {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
@@ -18,6 +18,8 @@ export class ExcelService {
   }
    saveAsExcelFile(buffer: any, fileName: string): void {
      const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
-     FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + EXCEL_EXTENSION);
+     FileSaver.saveAs(data, fileName);
   }
+  
+  
 }

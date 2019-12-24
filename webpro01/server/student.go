@@ -11,7 +11,6 @@ import (
 	"log"
 
 	"github.com/labstack/echo"
-
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -179,6 +178,10 @@ func (h *Handler) report(c echo.Context) error {
 }
 
 /////////////////////////////////////////////////////////////////////
+// func (h *Handler) getMacAddr(c echo.Context) error {
+// 	return
+// }
+
 // func (h *Handler) getMacAddr(c echo.Context) error {
 // 	ifas, err := net.Interfaces()
 // 	if err != nil {

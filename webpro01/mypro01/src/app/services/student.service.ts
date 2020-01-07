@@ -1,22 +1,54 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Local } from 'protractor/built/driverProviders';
+import { SocketService } from '../services/socket.service';
+import { Subject } from 'rxjs';
+import { delay, map } from 'rxjs/operators'
+
+const SOCKET_URL = "ws://10.35.1.89:443/ws";
+
+export interface Message {
+  action: string;
+  message: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-  
+  Localtion: any = []
+
 
   apiURL: string
   api: any
+  public messages: Subject<Message>;
+  constructor(private httpClient: HttpClient,private socketService: SocketService) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(resp => {
+        this.Localtion.latitude1 = resp.coords.latitude;
+        this.Localtion.longitude1 = resp.coords.longitude;
 
-  constructor(private httpClient: HttpClient) {
+      })
+    }
+    ///////////////////////////////////////////////
+    this.messages = <Subject<Message>>socketService.connect(SOCKET_URL).pipe(
+      map(
+        (response: MessageEvent): Message => {
+          let data = JSON.parse(response.data);
+          return {
+            action: data.action,
+            message: data.message
+          }
+        }
+      )
+    )
+    ////////////////////////////////////////////////////////////
     // this.httpClient.get('http://localhost:8080/getIP').subscribe(
     //   (data)=>{
     //     this.api='http://'+data.toString()+':80';
     //   }
     // )
-    this.apiURL = 'http://10.0.0.27:443';
+    this.apiURL = 'http://10.35.1.89:443';
   }
 
   getStudent() {
@@ -38,14 +70,25 @@ export class StudentService {
     Data.append("week", weeks);
     return this.httpClient.post(`${this.apiURL}/chacknameT/${id}`, Data);
   }
-  uploadStudent(course_id: any, course_names: any, times: any,sesons:any, student: any) {
+  uploadStudent(course_id: any, course_names: any, times: any, sesons: any, student: any) {
     return this.httpClient.post(`${this.apiURL}/upload`, {
       course_id: course_id,
       course_name: course_names,
       time: times,
-      seson:sesons,
+      seson: sesons,
       students: student
     });
+  }
+  // keeplocal(locals: any) {
+  //   // this.Localtion[0]["latitude"] = locals.latitude1;
+  //   // this.Localtion[1]["longitude"] = locals.longitude1;
+  //   // var Data: any = new FormData();
+  //   // Data.append("latitu", locals.latitude1);
+  //   // Data.append("longtu", locals.longitude1);
+  //   //return this.httpClient.post(`${this.apiURL}/keeplocaltion/${id}`, Data);
+  // }
+  getlocal() {
+    return this.Localtion
   }
   addstudent(idcoure: any, idstudent: any, names: any, number: any) {
     return this.httpClient.post(`${this.apiURL}/addupstudent/${idcoure}`, {

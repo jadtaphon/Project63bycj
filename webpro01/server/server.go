@@ -10,6 +10,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"gopkg.in/mgo.v2"
+
 )
 
 func main() {
@@ -42,6 +43,9 @@ func main() {
 		e.Logger.Fatal(err)
 	}
 
+	hub := newHub()
+	go hub.run()
+
 	// Initialize handler
 	h := &Handler{DB: db}
 	e.GET("/getCourse", h.getAllCourse)
@@ -54,6 +58,12 @@ func main() {
 	e.POST("/addupstudent/:id", h.addupstudent)
 	e.POST("/editstudent/:id", h.editstudent)
 	e.POST("/deletestudent/:id", h.deletestudent)
+	// e.POST("/keeplocaltion/:id", h.keeplocaltion)
+
+	e.GET("/ws", func(c echo.Context) error {
+		serveWs(hub, c.Response(), c.Request())
+		return nil
+	})
 	//e.GET("/getMacAddr", h.getMacAddr)
 	e.Logger.Fatal(e.Start(ip + ":443"))
 }

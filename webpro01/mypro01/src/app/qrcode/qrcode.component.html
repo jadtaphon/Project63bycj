@@ -26,12 +26,9 @@
     <button type="button" class="btn btn-info btn-lg" (click)="student(weeks.value)">Start QR code</button>
 
     <div class="container col-md-6">
-
-
       <ngx-qrcode [qrc-value]="qrcode_url" qrc-element-type="url" qrc-class="aclass" qrc-errorCorrectionLevel="L">
       </ngx-qrcode>
       <br>
-
 
     </div>
   </div>
@@ -40,9 +37,10 @@
         นศ</button></p>
     <br>
 
-
+<button (click)="test()">test</button>
     <br>
     <button (click)="back()">ปิด</button>
+    <button (click)="getlocaltion()">getlocals</button>
     <div class="text-center" id="reload_page">
       <p>{{contcome}}/{{cont}}</p>
     </div>
@@ -57,7 +55,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let s of showstudent">
+        <tr *ngFor="let s of showstudent ">
           <td class="text-center">{{s.number_id}}</td>
           <td class="text-center">{{s.id_student}}</td>
           <td>{{s.name}}</td>
@@ -65,6 +63,7 @@
         </tr>
       </tbody>
     </table>
+    <p>{{testt}}</p>
   </div>
 </div>
 

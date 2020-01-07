@@ -5,14 +5,13 @@ import (
 	"io/ioutil"
 	"net"
 	"os"
-
 	"net/http"
-
 	"log"
 
 	"github.com/labstack/echo"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+
 )
 
 func (h *Handler) getIP(c echo.Context) (err error) {
@@ -178,24 +177,35 @@ func (h *Handler) report(c echo.Context) error {
 }
 
 /////////////////////////////////////////////////////////////////////
-// func (h *Handler) getMacAddr(c echo.Context) error {
-// 	return
-// }
+// func (h *Handler) keeplocaltion(c echo.Context) (err error){
+// 	u := new(Local)
+// 	id := c.Param("id")
+// 	lati:=c.FormValue("latitu");
+// 	long:=c.FormValue("longtu");
 
-// func (h *Handler) getMacAddr(c echo.Context) error {
-// 	ifas, err := net.Interfaces()
-// 	if err != nil {
-// 		return c.JSON(http.StatusOK, err)
-// 	}
-// 	var addr []string
-// 	for _, ifa := range ifas {
-// 		a := ifa.HardwareAddr.String()
-// 		if a != "" {
-// 			addr = append(addr, a)
-// 		}
-// 	}
-// 	return c.JSON(http.StatusOK, addr)
-// 	//return as, nil
+	// if err := c.Bind(u); err != nil {
+	// 	return c.JSON(http.StatusBadRequest, err)
+	// }
+	// db := h.DB.Clone()
+	// defer db.Close()
+
+	// update:=bson.M{
+	// 	"$set": bson.M{
+	// 		"localtion.latitude1":      lati,
+	// 		"localtion.longitude1": long,
+	// 	},
+	// }
+	// if err := db.DB("test").C("course").
+	// 	UpdateId(bson.ObjectIdHex(id), update ); err != nil {
+	// 	if err == mgo.ErrNotFound {
+	// 		return echo.ErrNotFound
+	// 	}
+	// 	return c.JSON(http.StatusBadRequest, err)
+	// }
+// 	log.Print(lati)
+// 	log.Print(long)
+// 	log.Print(id)
+// 	return c.JSON(http.StatusOK, u)
 // }
 
 ///////////////////////////////////////////////////////////////

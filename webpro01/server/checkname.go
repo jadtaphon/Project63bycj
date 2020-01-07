@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"gopkg.in/mgo.v2/bson"
 	//"example.com/m/v2/model"
+
 )
 
 func (h *Handler) checkIn(c echo.Context) error {
@@ -145,6 +146,11 @@ func (h *Handler) checkIn(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
+
+	WsSendAction(c, WsMsg{
+		Action:  string(checknameEvent),
+		Payload: map[string]interface{}{"item": u},
+	})
 	return c.JSON(http.StatusOK, u)
 }
 

@@ -11,6 +11,7 @@ export class FromstusentComponent implements OnInit {
   course: any;
   idcoure: any;
   weeks: any;
+  gps2: any = [];
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router) { }
 
   ngOnInit() {
@@ -31,6 +32,10 @@ export class FromstusentComponent implements OnInit {
     var coure = localStorage.getItem('idcoure');
     var weekc = localStorage.getItem('week');
     var checkid = localStorage.getItem('id_active');
+
+    var between = this.getlocaltion();
+    console.log(between);
+    
 
     if (coure == this.idcoure) {
       if (weekc == this.weeks) {
@@ -53,6 +58,8 @@ export class FromstusentComponent implements OnInit {
   }
 
   saddata(sutdent: any) {
+    console.log(sutdent+"-"+this.idcoure+"-"+this.weeks);
+    
     this.studentService.chakname(this.idcoure, sutdent, this.weeks).subscribe(
       () => {
         localStorage.setItem('idcoure', this.idcoure)
@@ -60,5 +67,43 @@ export class FromstusentComponent implements OnInit {
         localStorage.setItem('id_active', sutdent)
       })
   }
+  getlocaltion() {
+    var c =0;
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(resp => {
+        this.gps2.latitude2 = resp.coords.latitude;
+        this.gps2.longtitude2 = resp.coords.longitude;
+
+        c= this.bitween(this.gps2);
+      })
+    }
+    //console.log(c);
+    
+    return c;
+
+  }
+  bitween(gps2: any) {
+    var gps1 = this.studentService.getlocal();
+
+    var dLat = this.degreesToRadians(gps2.latitude2 - gps1.latitude1);
+    var dLon = this.degreesToRadians(gps2.longtitude2 - gps1.longitude1);
+  
+    var lat1 = this.degreesToRadians(gps1.latitude1);
+    var lat2 = this.degreesToRadians(gps2.latitude2);
+
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var c = 6371 * c;
+
+  return c;
+
+    
+  }
+  degreesToRadians(degrees: any) {
+    return degrees * Math.PI / 180;
+  }
+
 }
 

@@ -31,7 +31,6 @@ export class QrcodeComponent implements OnInit {
 
     studentService.messages.subscribe(msg => {
       //console.log(msg.action);
-
       if (msg.action == "[student][checkname]") {
 
         this.studentService.reportCourse(this.idcoure).subscribe((data) => {
@@ -40,14 +39,11 @@ export class QrcodeComponent implements OnInit {
           
           this.studentcome()
         })
-        
-
-        
         //console.log(this.showstudent);
       }
     });
   }
-
+  ///////////////////////////////////////////////////////////////
   ngOnInit() {
     this.studentService.getIP().subscribe(
       (data) => {
@@ -59,21 +55,17 @@ export class QrcodeComponent implements OnInit {
     this.studentService.reportCourse(this.idcoure).subscribe(
       (data) => {
         this.course = data[0];
+        //console.log(this.course);
+        
         this.cont = this.course.students.length;
-        console.log(this.course);
       });
-
-      
   }
   student(week: any) {
     this.weeks = week;
     //console.log(this.qrcode_url);
-
     // const source = interval(1000);
-
     this.qruery()
     // this.subscription = source.subscribe(val => this.qruery());
-
     this.qrcode()
     this.show = false;
 
@@ -81,11 +73,8 @@ export class QrcodeComponent implements OnInit {
       navigator.geolocation.getCurrentPosition(resp => {
         this.localtion.latitude1 = resp.coords.latitude;
         this.localtion.longitude1 = resp.coords.longitude;
-
         //console.log(this.localtion);
         // this.studentService.keeplocal(this.localtion);
-
-
       })
     } else {
       alert('ไม่รองรับ gps')
@@ -94,10 +83,6 @@ export class QrcodeComponent implements OnInit {
   ///////////////////////////////////////////////////////////////////////////////
   qrcode() {
     this.qrcode_url = 'http://' + this.ip + ':80/student/' + this.idcoure + ',' + this.weeks;
-  }
-  /////////////////////////////////
-  test() {
-    this.qruery();
   }
   ////////////////////////////////
   qruery() {
@@ -150,10 +135,13 @@ export class QrcodeComponent implements OnInit {
     this.router.navigate(['student/' + this.idcoure + ',' + this.weeks])
     //this.subscription.unsubscribe();
   }
-  getlocaltion() {
-    var a = this.studentService.getlocal();
-    //console.log(a);
-  }
+reset(){
+  window.location.reload()
+}
+  // getlocaltion() {
+  //   var a = this.studentService.getlocal();
+  //   console.log(a);
+  // }
   // ngOnDestroy() {
   //   this.subscription.unsubscribe();
   // }

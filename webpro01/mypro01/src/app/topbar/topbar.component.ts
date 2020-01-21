@@ -21,9 +21,9 @@ export class TopbarComponent implements OnInit {
   //   this.router.navigate(['']);
   //   this.subscription.unsubscribe();
   // }
-  page1(){
-    this.router.navigate(['form'])
-  }
+  // page1(){
+  //   this.router.navigate(['form'])
+  // }
   // ngOnDestroy() {
   //   this.subscription.unsubscribe();
   // }

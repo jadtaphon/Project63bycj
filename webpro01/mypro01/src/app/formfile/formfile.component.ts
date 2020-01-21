@@ -28,8 +28,9 @@ export class FormfileComponent implements OnInit {
   ngOnInit() {
     
   }
-  onFileChange(evt: any) {
-    /* wire up file reader */
+  onFileChange(evt: any) {    
+    try {
+      /* wire up file reader */
     const target: DataTransfer = <DataTransfer>(evt.target);
     if (target.files.length !== 1) throw new Error('Cannot use multiple files');
     const reader: FileReader = new FileReader();
@@ -62,6 +63,10 @@ export class FormfileComponent implements OnInit {
     this.time=this.time.substr(13);
     };
    return reader.readAsBinaryString(target.files[0]);
+    } catch (error) {
+      alert('fire ไม่ถูกต้อง')
+    }
+    
   }
 
   upload(seson:number) {
@@ -73,16 +78,23 @@ export class FormfileComponent implements OnInit {
                 'name': this.student[key]['name']
             });
     }
-    if (localStorage.getItem('name')!=null) {
-      this.nameT=localStorage.getItem('name');
-      this.studentService.uploadStudent(this.course_id,this.course_name,this.time,seson, data).subscribe(
-        () => {
-          this.router.navigate(['/'])
-        }
-      )
+    if (this.student.length<=1) {
+      alert("ยังไม่ได้เลือก fire"); 
     }else{
-      alert('ยังไม่มีชื่ออาจารย์')
+      if (localStorage.getItem('name')!=null) {
+          this.nameT=localStorage.getItem('name');
+          if (seson==1||seson==2||seson==3) {
+            this.studentService.uploadStudent(this.course_id,this.course_name,this.time,seson, data).subscribe(
+              () => {
+                this.router.navigate(['/'])
+              }
+            )
+          }else{
+            alert('เลือกเทอม')
+          }
+        }else{
+          alert('ยังไม่มีชื่ออาจารย์')
+        }
     }
-    
   }
 }

@@ -35,60 +35,73 @@ export class FromstusentComponent implements OnInit {
 
     var between = this.getlocaltion();
     console.log(between);
-    
-
-    if (coure == this.idcoure) {
-      if (weekc == this.weeks) {
-        for (let index = 0; index < this.course.students.length; index++) {
-          var check = this.course.students[index].weeks['week' + this.weeks].id_active;
-          console.log(check);
-          if (checkid == check) {
-            alert(this.course.students[index].name + ' เช็คชื่อไปแล้ว')
-            break;
-          }
-        }
-      } else {
-        this.saddata(sutdent)
-        alert('เช็คชื่อเรียบร้อย')
-      }
+    if (between <= 150) {
+      this.checknamesad(sutdent, coure, weekc, checkid);
     } else {
-      this.saddata(sutdent)
-      alert('เช็คชื่อเรียบร้อย')
+      alert("can not")
     }
   }
-
+  checknamesad(sutdent: any, coure: any, weekc: any, checkid: any) {
+    if (sutdent != "") {
+      if (coure == this.idcoure) {
+        if (weekc == this.weeks) {
+          for (let index = 0; index < this.course.students.length; index++) {
+            var check = this.course.students[index].weeks['week' + this.weeks].id_active;
+            if (checkid == check) {
+              alert(this.course.students[index].name + ' เช็คชื่อไปแล้ว')
+              break;
+            }
+          }
+        } else {
+          this.saddata(sutdent)
+        }
+      }
+      else {
+        this.saddata(sutdent)
+      }
+    } else {
+      alert("กรอกรหัส นศ.")
+    }
+  }
   saddata(sutdent: any) {
-    console.log(sutdent+"-"+this.idcoure+"-"+this.weeks);
-    
-    this.studentService.chakname(this.idcoure, sutdent, this.weeks).subscribe(
-      () => {
-        localStorage.setItem('idcoure', this.idcoure)
-        localStorage.setItem('week', this.weeks)
-        localStorage.setItem('id_active', sutdent)
-      })
+    var check = false;
+    for (let index = 0; index < this.course['students'].length; index++) {
+      if (sutdent == this.course['students'][index].id_student) {
+        check = true;
+      }
+    }
+
+    if (check) {
+      this.studentService.chakname(this.idcoure, sutdent, this.weeks).subscribe(
+        () => {
+          localStorage.setItem('idcoure', this.idcoure)
+          localStorage.setItem('week', this.weeks)
+          localStorage.setItem('id_active', sutdent)
+          alert('เช็คชื่อเรียบร้อย')
+        })
+    } else {
+      alert("รหัสไม่ถูก")
+    }
   }
   getlocaltion() {
-    var c =0;
-
+    var c = 0;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(resp => {
         this.gps2.latitude2 = resp.coords.latitude;
         this.gps2.longtitude2 = resp.coords.longitude;
 
-        c= this.bitween(this.gps2);
+        c = this.bitween(this.gps2);
       })
     }
     //console.log(c);
-    
     return c;
-
   }
   bitween(gps2: any) {
     var gps1 = this.studentService.getlocal();
 
     var dLat = this.degreesToRadians(gps2.latitude2 - gps1.latitude1);
     var dLon = this.degreesToRadians(gps2.longtitude2 - gps1.longitude1);
-  
+
     var lat1 = this.degreesToRadians(gps1.latitude1);
     var lat2 = this.degreesToRadians(gps2.latitude2);
 
@@ -97,13 +110,10 @@ export class FromstusentComponent implements OnInit {
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var c = 6371 * c;
 
-  return c;
-
-    
+    return c;
   }
   degreesToRadians(degrees: any) {
     return degrees * Math.PI / 180;
   }
-
 }
 

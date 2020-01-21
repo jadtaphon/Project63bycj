@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Local } from 'protractor/built/driverProviders';
 import { SocketService } from '../services/socket.service';
 import { Subject } from 'rxjs';
 import { delay, map } from 'rxjs/operators'
 
-const SOCKET_URL = "ws://10.35.1.89:443/ws";
+const SOCKET_URL = "ws://10.0.0.27:443/ws";
 
 export interface Message {
   action: string;
@@ -15,19 +15,18 @@ export interface Message {
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService {
+export class StudentService implements OnInit {
+  
   Localtion: any = []
-
-
   apiURL: string
-  api: any
+  //api: any
   public messages: Subject<Message>;
+
   constructor(private httpClient: HttpClient,private socketService: SocketService) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(resp => {
         this.Localtion.latitude1 = resp.coords.latitude;
         this.Localtion.longitude1 = resp.coords.longitude;
-
       })
     }
     ///////////////////////////////////////////////
@@ -43,15 +42,23 @@ export class StudentService {
       )
     )
     ////////////////////////////////////////////////////////////
-    // this.httpClient.get('http://localhost:8080/getIP').subscribe(
+   
+    //this.apiURL = 'http://10.35.1.89:443';
+    this.apiURL='http://10.0.0.27:443'
+  }
+  ngOnInit() {
+    //  this.httpClient.get('http://localhost:443/getIP').subscribe(
     //   (data)=>{
-    //     this.api='http://'+data.toString()+':80';
+    //     this.apiURL='http://'+data.toString()+':443';
+    //     console.log(this.apiURL);
     //   }
     // )
-    this.apiURL = 'http://10.35.1.89:443';
+    
   }
 
   getStudent() {
+    console.log(this.apiURL);
+    
     return this.httpClient.get(`${this.apiURL}/getCourse`);
   }
   getIP() {
@@ -70,6 +77,12 @@ export class StudentService {
     Data.append("week", weeks);
     return this.httpClient.post(`${this.apiURL}/chacknameT/${id}`, Data);
   }
+  checknameOut_t(id: any, stdids: any, weeks: any){
+    var Data: any = new FormData();
+    Data.append("stdid", stdids);
+    Data.append("week", weeks);
+    return this.httpClient.post(`${this.apiURL}/checknameO/${id}`, Data);
+  }
   uploadStudent(course_id: any, course_names: any, times: any, sesons: any, student: any) {
     return this.httpClient.post(`${this.apiURL}/upload`, {
       course_id: course_id,
@@ -79,14 +92,11 @@ export class StudentService {
       students: student
     });
   }
-  // keeplocal(locals: any) {
-  //   // this.Localtion[0]["latitude"] = locals.latitude1;
-  //   // this.Localtion[1]["longitude"] = locals.longitude1;
-  //   // var Data: any = new FormData();
-  //   // Data.append("latitu", locals.latitude1);
-  //   // Data.append("longtu", locals.longitude1);
-  //   //return this.httpClient.post(`${this.apiURL}/keeplocaltion/${id}`, Data);
-  // }
+ updateStudent(id:any,dataupdate:any){
+   return this.httpClient.post(`${this.apiURL}/updatescore/${id}`,{
+    students:dataupdate
+   });
+ }
   getlocal() {
     return this.Localtion
   }

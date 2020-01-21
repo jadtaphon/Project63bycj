@@ -85,7 +85,36 @@ func (h *Handler) uploadCourse(c echo.Context) (err error) {
 	return c.JSON(http.StatusOK, &user)
 
 }
+//////////////////////////////////////////////////////////////////////////////
+func (h *Handler) updatescore(c echo.Context) error{
+	var bodyBytes []byte
+	if c.Request().Body != nil {
+		bodyBytes, _ = ioutil.ReadAll(c.Request().Body)
+	}
+   id := c.Param("id")
+   log.Print(id)
 
+	c.Request().Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
+
+	user := new(Course)
+	err := c.Bind(user)
+	if err != nil {
+		log.Print(err)
+		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	db := h.DB.Clone()
+	defer db.Close()
+
+	query := bson.M{"_id": bson.ObjectIdHex(id)}
+	update1 := bson.M{"$set": bson.M{"students":user.Sutdents}}
+
+	err = db.DB("test").C("course").Update(query, update1)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+	return c.JSON(http.StatusOK, user)
+}
 ///////////////////////////////////////////////////////////////////////
 func (h *Handler) addupstudent(c echo.Context) error {
 	u := new(Sutdent)
@@ -104,7 +133,6 @@ func (h *Handler) addupstudent(c echo.Context) error {
 		}
 		return c.JSON(http.StatusBadRequest, err)
 	}
-
 	return c.JSON(http.StatusOK, u)
 }
 
@@ -119,7 +147,6 @@ func (h *Handler) deletestudent(c echo.Context) error {
 
 	id := c.Param("id")
 	query := bson.M{"_id": bson.ObjectIdHex(id)}
-	//update := bson.M{"$pull": bson.M{"students.id_student": u.Idstudent}}
 	update := bson.M{"$pull": bson.M{"students": bson.M{"id_student": u.Idstudent}}}
 
 	err := db.DB("test").C("course").Update(query, update)
@@ -140,13 +167,6 @@ func (h *Handler) editstudent(c echo.Context) error {
 	db := h.DB.Clone()
 	defer db.Close()
 
-	// if err := db.DB("test").C("course").
-	// 	UpdateId(bson.ObjectIdHex(id), bson.M{"$addToSet": bson.M{"students": u}}); err != nil {
-	// 	if err == mgo.ErrNotFound {
-	// 		return echo.ErrNotFound
-	// 	}
-	// 	return c.JSON(http.StatusBadRequest, err)
-	// }
 	query := bson.M{"_id": bson.ObjectIdHex(id), "students.id_student": u.Idstudent}
 	update := bson.M{
 		"$set": bson.M{

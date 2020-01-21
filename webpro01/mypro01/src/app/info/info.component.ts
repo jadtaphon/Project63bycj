@@ -68,6 +68,19 @@ export class InfoComponent implements OnInit {
       }
     )
   }
+  chackbyOut(idstudent: any, count: number){
+    this.studentService.checknameOut_t(this.idcoure, idstudent, this.twee).subscribe(
+      () => {
+        console.log("ขาด");
+        this.studentService.reportCourse(this.idcoure).subscribe(
+          (data) => {
+            this.course = data[0];
+          });
+        // window.location.reload();
+      }
+    )
+
+  }
 
   back() {
     this.router.navigate([''])

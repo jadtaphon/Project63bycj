@@ -2,8 +2,8 @@ package main
 
 import (
 	"log"
-	// "os"
-	// "net"
+	"os"
+	"net"
 
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo"
@@ -12,22 +12,23 @@ import (
 
 func WsSendAction(e echo.Context, data WsMsg) error {
 	////////////get ip///////////
-	// addrs, err := net.InterfaceAddrs()
-	// if err != nil {
-	// 	os.Stderr.WriteString("Oops: " + err.Error() + "\n")
-	// 	os.Exit(1)
-	// }
-	// var ip string
-	// for _, a := range addrs {
-	// 	if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
-	// 		if ipnet.IP.To4() != nil {
-	// 			ip = ipnet.IP.String()
-	// 		}
-	// 	}
-	// }
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		os.Stderr.WriteString("Oops: " + err.Error() + "\n")
+		os.Exit(1)
+	}
+	var ip string
+	for _, a := range addrs {
+		if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				ip = ipnet.IP.String()
+			}
+		}
+	}
 	/////////////////////////////////////////////
 	
-	c, _, err := websocket.DefaultDialer.Dial("ws://10.35.1.89:443/ws", nil)
+	c, _, err := websocket.DefaultDialer.Dial("ws://"+ip+":443/ws", nil)
+	log.Println(ip+"test01")
 	if err != nil {
 		log.Println("dial:", err)
 		return err

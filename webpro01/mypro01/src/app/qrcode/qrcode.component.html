@@ -3,27 +3,38 @@
   <br>
   <br>
   <div class="text-center">
-    <select #weeks name="weeks" id="">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-      <option value="13">13</option>
-      <option value="14">14</option>
-      <option value="15">15</option>
-      <option value="16">16</option>
-    </select>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="selete">เลือกอาทิต</label>
+        <select class="form-control" #weeks name="weeks" id="selete" style="width: 100%;">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+        </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <br>
+        <button type="button" class="btn btn-info btn-lg text-center" (click)="student(weeks.value)">Start QR code</button>
+      </div>
+    </div>
 
     <!-- <button (click)="student(weeks.value)">Start</button> -->
-    <button type="button" class="btn btn-info btn-lg" (click)="student(weeks.value)">Start QR code</button>
+    
 
     <div class="container col-md-6">
       <ngx-qrcode [qrc-value]="qrcode_url" qrc-element-type="url" qrc-class="aclass" qrc-errorCorrectionLevel="L">
@@ -36,11 +47,10 @@
     <p class="text-center"><button class="btn btn-outline-secondary" (click)="fixinfo()" type="button">จัดการ
         นศ</button></p>
     <br>
-
-<button (click)="test()">test</button>
+<!-- <button (click)="test()">test</button> -->
     <br>
-    <button (click)="back()">ปิด</button>
-    <button (click)="getlocaltion()">getlocals</button>
+    <button class="btn btn-secondary" (click)="reset()">รีเซ็ต</button>
+    <!-- <button (click)="getlocaltion()">getlocals</button> -->
     <div class="text-center" id="reload_page">
       <p>{{contcome}}/{{cont}}</p>
     </div>
@@ -63,13 +73,12 @@
         </tr>
       </tbody>
     </table>
-    <p>{{testt}}</p>
   </div>
 </div>
 
 
-<div></div>
-<script>
+<!-- <div></div> -->
+<!-- <script>
   $('#reload_page').DataTable({
     ajax: "data.json"
   });
@@ -79,4 +88,4 @@
   }, 3000)
   console.log('hello');
 
-</script>
+</script> -->

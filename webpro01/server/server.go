@@ -1,10 +1,10 @@
 package main
 
 import (
-	"log"
 	"net"
 	"net/http"
 	"os"
+	"log"
 
 	//"github.com/tealeg/xlsx"
 	"github.com/labstack/echo"
@@ -54,16 +54,17 @@ func main() {
 	e.POST("/upload", h.uploadCourse)
 	e.POST("/chackname/:id", h.checkIn)
 	e.POST("/chacknameT/:id", h.checknameT)
+	e.POST("/checknameO/:id",h.checknameO)
 	e.GET("/getIP", h.getIP)
 	e.POST("/addupstudent/:id", h.addupstudent)
 	e.POST("/editstudent/:id", h.editstudent)
 	e.POST("/deletestudent/:id", h.deletestudent)
-	// e.POST("/keeplocaltion/:id", h.keeplocaltion)
+	e.POST("/updatescore/:id", h.updatescore)
 
 	e.GET("/ws", func(c echo.Context) error {
 		serveWs(hub, c.Response(), c.Request())
 		return nil
 	})
 	//e.GET("/getMacAddr", h.getMacAddr)
-	e.Logger.Fatal(e.Start(ip + ":443"))
+	e.Logger.Fatal(e.Start(ip+":443"))
 }

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router'
 import { StudentService } from '../services/student.service';
-import { interval, Subscription, Observable } from 'rxjs';
+import { interval, Subscription, Observable, BehaviorSubject } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { takeWhile, tap } from 'rxjs/operators';
 
 
 
@@ -13,6 +15,7 @@ import { interval, Subscription, Observable } from 'rxjs';
 })
 
 export class QrcodeComponent implements OnInit {
+  [x: string]: any;
   qrcode_url = "";
   course: any;
   showstudent: any[] = [];
@@ -24,10 +27,19 @@ export class QrcodeComponent implements OnInit {
   contcome: any;
   subscription: Subscription;
   show: any = true;
+  //show1: any = true;
+  show2: any = false;
   localtion: any = []
 
+  timerSrarted$ = new BehaviorSubject(false);
+  isAlive = true;
+  draw2cards = false;
+  timer;
+  time: any = 5;
+  ti = true;
 
-  constructor(private router: Router, private studentService: StudentService, private route: ActivatedRoute) {
+
+  constructor(private router: Router, private studentService: StudentService, private route: ActivatedRoute, private modalService: NgbModal) {
 
     studentService.messages.subscribe(msg => {
       //console.log(msg.action);
@@ -36,7 +48,7 @@ export class QrcodeComponent implements OnInit {
         this.studentService.reportCourse(this.idcoure).subscribe((data) => {
           this.course = data[0];
           this.cont = this.course.students.length;
-          
+
           this.studentcome()
         })
         //console.log(this.showstudent);
@@ -56,17 +68,37 @@ export class QrcodeComponent implements OnInit {
       (data) => {
         this.course = data[0];
         //console.log(this.course);
-        
+
         this.cont = this.course.students.length;
       });
+
+    ////////////////////////
+
+    this.timerSrarted$.pipe(
+      takeWhile(() => this.isAlive),
+      tap((next) => {
+        if (next) {
+          this.ti = false;
+          clearTimeout(this.timer);
+          this.timer = setTimeout(() => {
+            this.draw2cards = true;
+            document.getElementById('close').click()
+            //console.log(this.timerSrarted$);
+            this.timerSrarted$.next(false);
+          }, this.time * 1000)
+        }
+      })
+
+    ).subscribe();
   }
-  student(week: any) {
+  student(week: any, content) {
     this.weeks = week;
     //console.log(this.qrcode_url);
     // const source = interval(1000);
     this.qruery()
     // this.subscription = source.subscribe(val => this.qruery());
-    this.qrcode()
+    this.qrcode(content)
+    this.show2 = true;
     this.show = false;
 
     if (navigator.geolocation) {
@@ -81,7 +113,9 @@ export class QrcodeComponent implements OnInit {
     }
   }
   ///////////////////////////////////////////////////////////////////////////////
-  qrcode() {
+  qrcode(content) {
+    this.modalService.open(content, { size: 'lg', backdropClass: 'light-blue-backdrop' });
+
     this.qrcode_url = 'http://' + this.ip + ':80/student/' + this.idcoure + ',' + this.weeks;
   }
   ////////////////////////////////
@@ -95,7 +129,7 @@ export class QrcodeComponent implements OnInit {
   }
 
   studentcome() {
-    //console.log(122233322);
+
     var w = 'week' + this.weeks;
     this.contcome = 0;
     var i = 0;
@@ -131,18 +165,16 @@ export class QrcodeComponent implements OnInit {
     this.router.navigate(['info/' + this.idcoure + ',' + this.weeks])
   }
   back() {
-    //this.router.navigate(['/'])
     this.router.navigate(['student/' + this.idcoure + ',' + this.weeks])
-    //this.subscription.unsubscribe();
   }
-reset(){
-  window.location.reload()
-}
+  reset() {
+    window.location.reload()
+  }
   // getlocaltion() {
   //   var a = this.studentService.getlocal();
   //   console.log(a);
   // }
-  // ngOnDestroy() {
-  //   this.subscription.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.isAlive = false;
+  }
 }

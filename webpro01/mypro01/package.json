@@ -27,6 +27,7 @@
     "dev-ip": "^1.0.1",
     "file-saver": "^2.0.2",
     "jquery": "^3.4.1",
+    "ngx-countdown": "^8.0.3",
     "ngx-qrcode2": "0.0.9",
     "popper.js": "^1.16.0",
     "qrcode": "^1.4.4",

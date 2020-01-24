@@ -18,6 +18,8 @@ import { FromstusentComponent } from './fromstusent/fromstusent.component';
 import { InfonameComponent } from './infoname/infoname.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+
+import { CountdownModule } from 'ngx-countdown';
 @NgModule({
   declarations: [
     
@@ -36,7 +38,9 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
     NgxQRCodeModule,
     BrowserModule,
     AppRoutingModule,
-    NgbModule,HttpClientModule
+    NgbModule,
+    HttpClientModule,
+    CountdownModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

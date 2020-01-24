@@ -68,7 +68,6 @@ export class QrcodeComponent implements OnInit {
       (data) => {
         this.course = data[0];
         //console.log(this.course);
-
         this.cont = this.course.students.length;
       });
 

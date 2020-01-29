@@ -13,6 +13,7 @@ export class InfonameComponent implements OnInit {
   course: object;
   show: any = false;
   dataStrings: any;
+  datagetweek:any=16;
   id: any;
 
   constructor(private router: Router, private studentService: StudentService, private route: ActivatedRoute, private excelService: ExcelService, private modalService: NgbModal) { }
@@ -52,7 +53,7 @@ export class InfonameComponent implements OnInit {
   }
   /////////////////////////////////////////////////////////////////////
   showsumfile(content) {
-    this.modalService.open(content, { size: 'lg' });
+    this.modalService.open(content, { size: 'xl' });
   }
   ///////////////////อ่านชื่อไฟล์////////////////
   sumfile(ent: any) {
@@ -77,6 +78,8 @@ export class InfonameComponent implements OnInit {
         return initial;
       }, {});
       this.dataStrings = jsonData.data;
+      this.getweeks(this.dataStrings);
+      
       this.sumfile(evt);
     }
     reader.readAsBinaryString(file);
@@ -95,11 +98,11 @@ export class InfonameComponent implements OnInit {
     if (this.dataStrings.length==this.course['students'].length&&this.dataStrings[0].course_id==this.course['course_id']) {  
     for (let index = 0; index < this.course['students'].length; index++) {
       for (let j = 1; j <= 16; j++) {
-        if (this.course['students'][index].weeks['week' + j].week || this.dataStrings[index]['week' + j] == 1) {
+        if (this.course['students'][index].weeks['week' + j].week == 1 || this.dataStrings[index]['week' + j] == 1) {
           this.course['students'][index].weeks['week' + j].week = 1
           //console.log(1);
         }
-        else if (this.course['students'][index].weeks['week' + j].week || this.dataStrings[index]['week' + j] == 0.5) {
+        else if (this.course['students'][index].weeks['week' + j].week == 0.5 || this.dataStrings[index]['week' + j] == 0.5) {
           this.course['students'][index].weeks['week' + j].week = 0.5
           //console.log(0.5);
         }
@@ -118,9 +121,22 @@ export class InfonameComponent implements OnInit {
   getscore(data: any) {
     let score = 0;
     for (let i = 1; i <= 16; i++) {
-      score += data["week" + i];
+      score = data["week" + i];
+      return score;
     }
-    return score;
+    
+  }
+  getweeks(data:any){
+    console.log(data);
+    // for (let index = 0; index < data.length; index++) {
+    //   this.datagetweek[index]=""
+    //   for (let j = 0; j <=16; j++) {
+    //     console.log(data[index]['week'+j]);
+    //     this.datagetweek=data[index]['week'+j];
+    //     //this.datagetweek[index][j]=data[index]['week'+j]
+    //   }
+    // }
+    // console.log(this.datagetweek);
   }
   back() {
     this.router.navigate([''])

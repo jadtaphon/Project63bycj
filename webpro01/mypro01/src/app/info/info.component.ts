@@ -11,10 +11,12 @@ import * as $ from "jquery"
 export class InfoComponent implements OnInit {
 
   course: any;
+  //courseShow: any;
   idcoure: any;
-  week: any;
+  //week: any;
   twee: any;
   showS: any = false;
+  statusShow: any="ทั้งหมด";
 
 
   constructor(private router: Router, private studentService: StudentService, private route: ActivatedRoute) {
@@ -35,11 +37,33 @@ export class InfoComponent implements OnInit {
         this.course = data[0];
       });
   }
-  student(weeks: any) {
+  student(weeks: any,status:any) {
+    
     this.twee = weeks;
-    console.log(this.twee);
+    this.statusShow=status;
   }
-
+  search(status: any) {
+    var count = 0;
+    
+      for (let index = 0; index < this.course['students'].length; index++) {
+        var data = this.course['students'][index].weeks['week' + this.twee].week
+        if (data == 1&& status==1) {
+          
+          count ++;
+        }else if (data == 0.5&& status==2) {
+          count ++;
+        }else if (data == 0&& status==3) {
+          count ++;
+        }else if (status=="ทั้งหมด") {
+          count ++;
+        }
+      }
+    
+    console.log(count);
+   
+    
+    
+  }
   chackbyTcome(idstudent: any, count: number) {
     this.studentService.chakname(this.idcoure, idstudent, this.twee).subscribe(
       () => {
@@ -48,11 +72,6 @@ export class InfoComponent implements OnInit {
           (data) => {
             this.course = data[0];
           });
-
-        // $(document).ready(function(){
-        //   location.reload();
-        //   });
-        //window.location.reload();
       }
     )
   }
@@ -68,7 +87,7 @@ export class InfoComponent implements OnInit {
       }
     )
   }
-  chackbyOut(idstudent: any, count: number){
+  chackbyOut(idstudent: any, count: number) {
     this.studentService.checknameOut_t(this.idcoure, idstudent, this.twee).subscribe(
       () => {
         console.log("ขาด");
@@ -79,7 +98,6 @@ export class InfoComponent implements OnInit {
         // window.location.reload();
       }
     )
-
   }
 
   back() {

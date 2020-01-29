@@ -20,6 +20,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 import { CountdownModule } from 'ngx-countdown';
+import { StudentFilterPipe } from './info/student-filter.pipe';
 @NgModule({
   declarations: [
     
@@ -33,6 +34,7 @@ import { CountdownModule } from 'ngx-countdown';
     InfoComponent,
     FromstusentComponent,
     InfonameComponent,
+    StudentFilterPipe
   ],
   imports: [
     NgxQRCodeModule,

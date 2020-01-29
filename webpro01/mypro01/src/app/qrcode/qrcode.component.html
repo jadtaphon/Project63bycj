@@ -4,7 +4,7 @@
   <br>
   <div class="text-center" *ngIf="!draw2cards">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="form-group">
           <label for="selete">เลือกอาทิต</label>
           <select class="form-control" #weeks name="weeks" id="selete" style="width: 100%;">
@@ -27,11 +27,23 @@
           </select>
         </div>
       </div>
-
-      <div class="col-md-6" >
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="selete">setting time</label>
+          <select class="form-control" #times name="times" id="selete" style="width: 100%;">
+            <option value="300">5</option>
+            <option value="600">10</option>
+            <option value="900">15</option>
+            <option value="1200">20</option>
+            <option value="1500">25</option>
+            <option value="1800">30</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4" >
         <br>
         <button type="button" class="btn btn-info btn-lg text-center"
-          (click)="student(weeks.value,content); timerSrarted$.next(true);">Start QR
+          (click)="student(weeks.value,times.value,content); timerSrarted$.next(true);">Start QR
           code</button>
       </div>
       
@@ -39,17 +51,17 @@
 
     <ng-template #content let-modal >
       <div class="modal-header">
-        <h4 class="modal-title text-center">QR Code</h4>
+        <h4 class="modal-title text-center">สัปดาห์ที่{{weeks.value}}</h4>
         <a type="button" class="close" aria-label="Close" id="close"  (click)="timerSrarted$.next(false); modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </a>
       </div>
       <div class="modal-body">
         <div class="text-center">
-          <p>week at {{weeks.value}}</p>
-          <countdown #countdown [config]="{leftTime: time, demand: ti}">$!m!:$!s!</countdown>
+          <!-- <p>week at {{weeks.value}}</p> -->
+          <h1><countdown #countdown [config]="{leftTime: time, demand: ti}">$!m!:$!s!</countdown></h1>
         </div>
-        <div class="container col-md-12">
+        <div class="container col-md-9">
           <ngx-qrcode [qrc-value]="qrcode_url" qrc-element-type="url" qrc-class="aclass" qrc-errorCorrectionLevel="L">
           </ngx-qrcode>
         </div>

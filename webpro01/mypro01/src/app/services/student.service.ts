@@ -5,7 +5,7 @@ import { SocketService } from '../services/socket.service';
 import { Subject } from 'rxjs';
 import { delay, map } from 'rxjs/operators'
 
-const SOCKET_URL = "ws://10.0.0.27:443/ws";
+const SOCKET_URL = "ws://10.0.1.194:443/ws";
 
 export interface Message {
   action: string;
@@ -44,7 +44,7 @@ export class StudentService implements OnInit {
     ////////////////////////////////////////////////////////////
    
     //this.apiURL = 'http://10.35.1.89:443';
-    this.apiURL='http://10.0.0.27:443'
+    this.apiURL='http://10.0.1.194:443'
   }
   ngOnInit() {
     //  this.httpClient.get('http://localhost:443/getIP').subscribe(
@@ -53,7 +53,6 @@ export class StudentService implements OnInit {
     //     console.log(this.apiURL);
     //   }
     // )
-    
   }
 
   getStudent() {

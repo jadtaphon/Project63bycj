@@ -35,7 +35,7 @@ export class QrcodeComponent implements OnInit {
   isAlive = true;
   draw2cards = false;
   timer;
-  time: any = 5;
+  time: any = 300;
   ti = true;
 
 
@@ -68,6 +68,7 @@ export class QrcodeComponent implements OnInit {
       (data) => {
         this.course = data[0];
         //console.log(this.course);
+
         this.cont = this.course.students.length;
       });
 
@@ -90,8 +91,9 @@ export class QrcodeComponent implements OnInit {
 
     ).subscribe();
   }
-  student(week: any, content) {
+  student(week: any,times:any, content) {
     this.weeks = week;
+    this.time=times;
     //console.log(this.qrcode_url);
     // const source = interval(1000);
     this.qruery()
@@ -113,7 +115,7 @@ export class QrcodeComponent implements OnInit {
   }
   ///////////////////////////////////////////////////////////////////////////////
   qrcode(content) {
-    this.modalService.open(content, { size: 'lg', backdropClass: 'light-blue-backdrop' });
+    this.modalService.open(content, { size: 'xl', backdropClass: 'light-blue-backdrop' });
 
     this.qrcode_url = 'http://' + this.ip + ':80/student/' + this.idcoure + ',' + this.weeks;
   }

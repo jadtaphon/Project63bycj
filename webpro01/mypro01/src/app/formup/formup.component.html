@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="text-center">Update Classroom</h1>
+  <h1 class="text-center">Update Student</h1>
 
   <div class="container">
     <button [hidden]="showB" class="btn-lg btn-block btn-info" (click)="show()" style="line-height: 1.5;">เพิ่ม
@@ -23,7 +23,7 @@
       <div class="text-right">
         <button type="submit" class="btn-lg btn-success"
           (click)="addup(idstudent.value,namefirst.value,namelast.value)">ok</button>
-        <button class="btn-lg btn-danger" (click)="unshow()">ยกเลิก</button>
+        <button class="btn-lg btn-danger" id="close1" (click)="unshow()">ยกเลิก</button>
       </div>
     </div>
 
@@ -48,23 +48,22 @@
         <td><button type="submit" class="btn-lg btn-block btn-danger" (click)="delete(s.id_student)">ลบ</button></td>
         <ng-template #content let-modal>
           <div class="modal-header">
-            <h4 class="modal-title">Modal title</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <h4 class="modal-title">Edit</h4>
+            <button type="button" class="close" aria-label="Close" id="close2" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body" >
             <div class="row">
               <div class="col-3">
-                <label for="">idstudent</label>
+                <label for="">รหัส นักศึกษา</label>
                 <input type="text" class="form-control" #idstudent name="idstudent" value={{s.id_student}}>
               </div>
               <div class="col-4">
-                <label for="">name</label>
+                <label for="">ชื่อ-นามสกุล</label>
                 <input type="text" class="form-control" #name name="name" value={{s.name}}>
               </div>
             </div>
-            <p>One fine body&hellip;</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light" (click)="editstudent(idstudent.value,name.value,s.number_id)">save</button>

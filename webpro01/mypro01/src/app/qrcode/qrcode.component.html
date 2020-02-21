@@ -40,29 +40,39 @@
           </select>
         </div>
       </div>
-      <div class="col-md-4" >
+      <div class="col-md-4">
         <br>
         <button type="button" class="btn btn-info btn-lg text-center"
           (click)="student(weeks.value,times.value,content); timerSrarted$.next(true);">Start QR
           code</button>
       </div>
-      
+
     </div>
 
-    <ng-template #content let-modal >
+    <ng-template #content let-modal>
       <div class="modal-header">
         <h4 class="modal-title text-center">สัปดาห์ที่{{weeks.value}}</h4>
-        <a type="button" class="close" aria-label="Close" id="close"  (click)="timerSrarted$.next(false); modal.dismiss('Cross click')">
+        <a type="button" class="close" aria-label="Close" id="close"
+          (click)="timerSrarted$.next(false); modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </a>
       </div>
       <div class="modal-body">
         <div class="text-center">
           <!-- <p>week at {{weeks.value}}</p> -->
-          <h1><countdown #countdown [config]="{leftTime: time, demand: ti}">$!m!:$!s!</countdown></h1>
+          <h1>
+            <countdown #countdown [config]="{leftTime: time, demand: ti}">$!m!:$!s!</countdown>
+          </h1>
         </div>
-        <div class="container col-md-9">
-          <ngx-qrcode [qrc-value]="qrcode_url" qrc-element-type="url" qrc-class="aclass" qrc-errorCorrectionLevel="L">
+        <div class="container col-md-8">
+          <ngx-qrcode 
+            [qrc-value]="qrcode_url" 
+            qrc-element-type="url" 
+            qrc-class="aclass" 
+            qrc-errorCorrectionLevel="L"
+            qrc-scanQrcode="timeqrcode"
+            
+            >
           </ngx-qrcode>
         </div>
       </div>

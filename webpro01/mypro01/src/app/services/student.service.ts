@@ -5,7 +5,7 @@ import { SocketService } from '../services/socket.service';
 import { Subject } from 'rxjs';
 import { delay, map } from 'rxjs/operators'
 
-const SOCKET_URL = "ws://10.0.1.194:443/ws";
+const SOCKET_URL = "ws://10.0.1.37:443/ws";
 
 export interface Message {
   action: string;
@@ -16,13 +16,13 @@ export interface Message {
   providedIn: 'root'
 })
 export class StudentService implements OnInit {
-  
+
   Localtion: any = []
   apiURL: string
   //api: any
   public messages: Subject<Message>;
 
-  constructor(private httpClient: HttpClient,private socketService: SocketService) {
+  constructor(private httpClient: HttpClient, private socketService: SocketService) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(resp => {
         this.Localtion.latitude1 = resp.coords.latitude;
@@ -42,9 +42,9 @@ export class StudentService implements OnInit {
       )
     )
     ////////////////////////////////////////////////////////////
-   
+
     //this.apiURL = 'http://10.35.1.89:443';
-    this.apiURL='http://10.0.1.194:443'
+    this.apiURL = 'http://10.0.1.37:443'
   }
   ngOnInit() {
     //  this.httpClient.get('http://localhost:443/getIP').subscribe(
@@ -56,8 +56,6 @@ export class StudentService implements OnInit {
   }
 
   getStudent() {
-    console.log(this.apiURL);
-    
     return this.httpClient.get(`${this.apiURL}/getCourse`);
   }
   getIP() {
@@ -76,7 +74,7 @@ export class StudentService implements OnInit {
     Data.append("week", weeks);
     return this.httpClient.post(`${this.apiURL}/chacknameT/${id}`, Data);
   }
-  checknameOut_t(id: any, stdids: any, weeks: any){
+  checknameOut_t(id: any, stdids: any, weeks: any) {
     var Data: any = new FormData();
     Data.append("stdid", stdids);
     Data.append("week", weeks);
@@ -91,11 +89,11 @@ export class StudentService implements OnInit {
       students: student
     });
   }
- updateStudent(id:any,dataupdate:any){
-   return this.httpClient.post(`${this.apiURL}/updatescore/${id}`,{
-    students:dataupdate
-   });
- }
+  updateStudent(id: any, dataupdate: any) {
+    return this.httpClient.post(`${this.apiURL}/updatescore/${id}`, {
+      students: dataupdate
+    });
+  }
   getlocal() {
     return this.Localtion
   }

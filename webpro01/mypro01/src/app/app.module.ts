@@ -18,9 +18,11 @@ import { FromstusentComponent } from './fromstusent/fromstusent.component';
 import { InfonameComponent } from './infoname/infoname.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+//import { QrCodeAllModule } from 'ngx-qrcode-all';
 
 import { CountdownModule } from 'ngx-countdown';
 import { StudentFilterPipe } from './info/student-filter.pipe';
+import { ScanfailComponent } from './scanfail/scanfail.component';
 @NgModule({
   declarations: [
     
@@ -34,7 +36,8 @@ import { StudentFilterPipe } from './info/student-filter.pipe';
     InfoComponent,
     FromstusentComponent,
     InfonameComponent,
-    StudentFilterPipe
+    StudentFilterPipe,
+    ScanfailComponent
   ],
   imports: [
     NgxQRCodeModule,

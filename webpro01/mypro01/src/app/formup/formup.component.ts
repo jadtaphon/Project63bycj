@@ -42,6 +42,7 @@ export class FormupComponent implements OnInit {
             this.course = data[0];
           }
         )
+        document.getElementById('close1').click()
        }
     )
   }
@@ -54,6 +55,7 @@ export class FormupComponent implements OnInit {
             this.course = data[0];
           }
         )
+        document.getElementById('close2').click()
       }
     )
   }

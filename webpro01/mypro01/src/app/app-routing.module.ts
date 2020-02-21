@@ -7,16 +7,18 @@ import { FormupComponent } from './formup/formup.component';
 import { InfoComponent } from './info/info.component';
 import { FromstusentComponent } from "./fromstusent/fromstusent.component";
 import { InfonameComponent } from './infoname/infoname.component';
+import { ScanfailComponent } from './scanfail/scanfail.component';
 
 
 const routes: Routes = [
-  { path: '', component: CardhomeComponent },
+  { path: 'homeclassroom', component: CardhomeComponent },
   { path: 'form', component: FormfileComponent },
   { path: 'qrcode/:id', component: QrcodeComponent },
   { path: 'update/:id', component: FormupComponent },
   { path: 'info/:id', component: InfoComponent },
   { path: 'student/:id', component: FromstusentComponent },
-  { path: 'infoname/:id', component: InfonameComponent }
+  { path: 'infoname/:id', component: InfonameComponent },
+  { path: 'scanfail', component: ScanfailComponent }
 ];
 
 @NgModule({

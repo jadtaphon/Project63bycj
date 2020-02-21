@@ -15,6 +15,8 @@ export class FormfileComponent implements OnInit {
   //fileName: string = 'SheetJS.xlsx';
   wss: any
 
+  check: any[]=[];
+
   student: any[][] = [[]];
   nameT: any;
   course : any;
@@ -26,6 +28,7 @@ export class FormfileComponent implements OnInit {
   constructor(private router: Router, private studentService: StudentService) { }
 
   ngOnInit() {
+
     
   }
   onFileChange(evt: any) {    
@@ -78,12 +81,15 @@ export class FormfileComponent implements OnInit {
                 'name': this.student[key]['name']
             });
     }
+    
     if (this.student.length<=1) {
       alert("ยังไม่ได้เลือก fire"); 
     }else{
       if (localStorage.getItem('name')!=null) {
           this.nameT=localStorage.getItem('name');
           if (seson==1||seson==2||seson==3) {
+            console.log("work");
+            
             this.studentService.uploadStudent(this.course_id,this.course_name,this.time,seson, data).subscribe(
               () => {
                 this.router.navigate(['/'])
@@ -97,4 +103,6 @@ export class FormfileComponent implements OnInit {
         }
     }
   }
+
+
 }

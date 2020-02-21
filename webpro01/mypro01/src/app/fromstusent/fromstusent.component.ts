@@ -8,10 +8,12 @@ import { StudentService } from '../services/student.service';
   styleUrls: ['./fromstusent.component.scss']
 })
 export class FromstusentComponent implements OnInit {
+  
   course: any;
   idcoure: any;
   weeks: any;
   gps2: any = [];
+
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router) { }
 
   ngOnInit() {
@@ -34,7 +36,6 @@ export class FromstusentComponent implements OnInit {
     var checkid = localStorage.getItem('id_active');
 
     var between = this.getlocaltion();
-    console.log(between);
     if (between <= 150) {
       this.checknamesad(sutdent, coure, weekc, checkid);
     } else {
@@ -93,7 +94,6 @@ export class FromstusentComponent implements OnInit {
         c = this.bitween(this.gps2);
       })
     }
-    //console.log(c);
     return c;
   }
   bitween(gps2: any) {

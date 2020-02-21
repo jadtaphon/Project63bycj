@@ -32,9 +32,9 @@ export class CardComponent implements OnInit {
 
 
   }
-  pageqr(id:any) {
+  pageqr(id:any,key:any) {
 
-    this.router.navigate(['qrcode/'+id])
+    this.router.navigate(['qrcode/'+id+","+key])
   }
   pageup(id :any) {
     this.router.navigate(['update/'+id])

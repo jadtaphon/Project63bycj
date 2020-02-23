@@ -22,7 +22,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 import { CountdownModule } from 'ngx-countdown';
 import { StudentFilterPipe } from './info/student-filter.pipe';
-import { ScanfailComponent } from './scanfail/scanfail.component';
+
 @NgModule({
   declarations: [
     
@@ -37,7 +37,7 @@ import { ScanfailComponent } from './scanfail/scanfail.component';
     FromstusentComponent,
     InfonameComponent,
     StudentFilterPipe,
-    ScanfailComponent
+   
   ],
   imports: [
     NgxQRCodeModule,

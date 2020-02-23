@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { StudentService } from "../services/student.service"
+import { Local } from 'protractor/built/driverProviders';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -19,10 +20,11 @@ export class CardComponent implements OnInit {
   delete(id:any){
      this.studentService.deleteCourse(id).subscribe(
      ()=>{
-      this.studentService.getStudent().subscribe(
-        (res) => {
-        this.course = res
-      });
+      window.location.reload();
+      // this.studentService.getStudent().subscribe(
+      //   (res) => {
+      //   this.course = res
+      // });
        }
      )
     

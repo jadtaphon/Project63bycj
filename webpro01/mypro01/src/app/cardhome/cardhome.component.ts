@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentService } from "../services/student.service"
 
 @Component({
   selector: 'app-cardhome',
@@ -7,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardhomeComponent implements OnInit {
   namet: any;
+  numcourse:any =0;
   show: any = false;
-  constructor() { }
+  constructor(private studentService: StudentService) { }
 
   ngOnInit() {
+    this.studentService.getStudent().subscribe(
+      (data)=>{
+        this.numcourse=data.length
+      }
+    )
     if (localStorage.getItem('name') != null) {
       this.namet= localStorage.getItem('name');
       this.show = true;

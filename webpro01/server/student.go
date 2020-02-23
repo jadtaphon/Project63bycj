@@ -3,10 +3,10 @@ package main
 import (
 	"bytes"
 	"io/ioutil"
-	"net"
-	"os"
-	"net/http"
 	"log"
+	"net"
+	"net/http"
+	"os"
 
 	"github.com/labstack/echo"
 	"gopkg.in/mgo.v2"
@@ -70,11 +70,13 @@ func (h *Handler) uploadCourse(c echo.Context) (err error) {
 	c.Request().Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
 
 	user := new(Course)
+
 	err = c.Bind(user)
 	if err != nil {
 		log.Print(err)
 		return c.JSON(http.StatusBadRequest, err)
 	}
+	log.Print(user.CourseID)
 
 	db := h.DB.Clone()
 	defer db.Close()
@@ -82,17 +84,24 @@ func (h *Handler) uploadCourse(c echo.Context) (err error) {
 	if err = db.DB("test").C("course").Insert(user); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
+	if err != nil {
+		if mgo.IsDup(err) {
+			log.Panicln(err)
+		}
+
+	}
 	return c.JSON(http.StatusOK, &user)
 
 }
+
 //////////////////////////////////////////////////////////////////////////////
-func (h *Handler) updatescore(c echo.Context) error{
+func (h *Handler) updatescore(c echo.Context) error {
 	var bodyBytes []byte
 	if c.Request().Body != nil {
 		bodyBytes, _ = ioutil.ReadAll(c.Request().Body)
 	}
-   id := c.Param("id")
-   log.Print(id)
+	id := c.Param("id")
+	log.Print(id)
 
 	c.Request().Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
 
@@ -107,7 +116,7 @@ func (h *Handler) updatescore(c echo.Context) error{
 	defer db.Close()
 
 	query := bson.M{"_id": bson.ObjectIdHex(id)}
-	update1 := bson.M{"$set": bson.M{"students":user.Sutdents}}
+	update1 := bson.M{"$set": bson.M{"students": user.Sutdents}}
 
 	err = db.DB("test").C("course").Update(query, update1)
 	if err != nil {
@@ -115,6 +124,7 @@ func (h *Handler) updatescore(c echo.Context) error{
 	}
 	return c.JSON(http.StatusOK, user)
 }
+
 ///////////////////////////////////////////////////////////////////////
 func (h *Handler) addupstudent(c echo.Context) error {
 	u := new(Sutdent)
@@ -197,35 +207,3 @@ func (h *Handler) report(c echo.Context) error {
 }
 
 /////////////////////////////////////////////////////////////////////
-// func (h *Handler) keeplocaltion(c echo.Context) (err error){
-// 	u := new(Local)
-// 	id := c.Param("id")
-// 	lati:=c.FormValue("latitu");
-// 	long:=c.FormValue("longtu");
-
-	// if err := c.Bind(u); err != nil {
-	// 	return c.JSON(http.StatusBadRequest, err)
-	// }
-	// db := h.DB.Clone()
-	// defer db.Close()
-
-	// update:=bson.M{
-	// 	"$set": bson.M{
-	// 		"localtion.latitude1":      lati,
-	// 		"localtion.longitude1": long,
-	// 	},
-	// }
-	// if err := db.DB("test").C("course").
-	// 	UpdateId(bson.ObjectIdHex(id), update ); err != nil {
-	// 	if err == mgo.ErrNotFound {
-	// 		return echo.ErrNotFound
-	// 	}
-	// 	return c.JSON(http.StatusBadRequest, err)
-	// }
-// 	log.Print(lati)
-// 	log.Print(long)
-// 	log.Print(id)
-// 	return c.JSON(http.StatusOK, u)
-// }
-
-///////////////////////////////////////////////////////////////

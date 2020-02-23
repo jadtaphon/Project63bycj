@@ -86,7 +86,7 @@ export class QrcodeComponent implements OnInit {
           clearTimeout(this.timer);
           this.timer = setTimeout(() => {
             this.draw2cards = true;
-            this.herokuService.updateQR(this.keycoure, this.idcoure,"http://"+this.ip+":80/scanfail/").subscribe()
+            this.herokuService.updateQR(this.keycoure, this.idcoure,"https://testmypro-01.herokuapp.com/").subscribe()
             document.getElementById('close').click()
             //console.log(this.timerSrarted$);
             this.qrcode_url = "timeout"

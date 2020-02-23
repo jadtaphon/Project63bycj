@@ -4,6 +4,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 
 )
+
 type (
 	Course struct {
 		ID         bson.ObjectId `json:"id" bson:"_id,omitempty"`
@@ -12,12 +13,7 @@ type (
 		Day_Time   string        `json:"time" bson:"time"`
 		Seson      string        `json:"seson" bson:"seson"`
 		Sutdents   []Sutdent     `json:"students" bson:"students"`
-		// Localtion  []Local   	 `json:"localtion" bson:"localtion"`
 	}
-	// Local struct{
-	// 	Latitude1 		float32   		`json:"latitude1" bson:"latitude1"`
-	// 	Longitude1 		float32 		`json:"longitude1" bson:"longitude1"`
-	// }
 	Sutdent struct {
 		NumberID  int    `json:"number_id" bson:"number_id"`
 		Idstudent string `json:"id_student" bson:"id_student"`

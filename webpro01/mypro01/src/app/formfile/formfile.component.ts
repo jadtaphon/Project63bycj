@@ -88,8 +88,7 @@ export class FormfileComponent implements OnInit {
       if (localStorage.getItem('name')!=null) {
           this.nameT=localStorage.getItem('name');
           if (seson==1||seson==2||seson==3) {
-            console.log("work");
-            
+            console.log("work seson");
             this.studentService.uploadStudent(this.course_id,this.course_name,this.time,seson, data).subscribe(
               () => {
                 this.router.navigate(['/'])

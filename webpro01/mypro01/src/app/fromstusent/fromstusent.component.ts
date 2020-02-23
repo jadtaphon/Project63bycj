@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from '../models/student';
 import { Router, ActivatedRoute } from '@angular/router'
 import { StudentService } from '../services/student.service';
 @Component({
@@ -17,11 +16,21 @@ export class FromstusentComponent implements OnInit {
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router) { }
 
   ngOnInit() {
-
     this.route.paramMap.subscribe(params => {
       this.idcoure = params.get('id').split(',').shift();
       this.weeks = params.get('id').split(',').slice()[1];
     });
+
+    var coure = localStorage.getItem('idcoure');
+    var weekc = localStorage.getItem('week');
+
+      if (coure == this.idcoure) {
+        if (weekc == this.weeks) {
+          window.location.href='https://testmypro-01.herokuapp.com/success'
+        } 
+      }
+
+  
 
     this.studentService.reportCourse(this.idcoure).subscribe(
       (data) => {
@@ -49,8 +58,7 @@ export class FromstusentComponent implements OnInit {
           for (let index = 0; index < this.course.students.length; index++) {
             var check = this.course.students[index].weeks['week' + this.weeks].id_active;
             if (checkid == check) {
-              alert(this.course.students[index].name + ' เช็คชื่อไปแล้ว')
-              break;
+              window.location.href='https://testmypro-01.herokuapp.com/success'
             }
           }
         } else {
@@ -79,6 +87,7 @@ export class FromstusentComponent implements OnInit {
           localStorage.setItem('week', this.weeks)
           localStorage.setItem('id_active', sutdent)
           alert('เช็คชื่อเรียบร้อย')
+          window.location.href='https://testmypro-01.herokuapp.com/success'
         })
     } else {
       alert("รหัสไม่ถูก")

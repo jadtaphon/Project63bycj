@@ -10,3 +10,21 @@
     font-weight: 500;
     line-height: 1.7;
 }
+.col-md-2 {
+    flex: 5 0 16.666667%;
+    max-width: 17.666667%;
+}
+.col-md-10 {
+    flex: 0 0 83.333333%;
+    max-width: 82.333333%;
+}
+.btnqr{
+    color:white;
+    background-color:#352245; 
+    padding: 5.375rem 0.79rem;
+}
+.btndenger{
+    color:white; 
+    background-color:#B22222; 
+    padding: 0.375rem 1.95rem;
+}

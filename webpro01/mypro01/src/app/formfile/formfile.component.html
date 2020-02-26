@@ -50,7 +50,7 @@
           <th scope="col">ชื่อ-นานสกุล</th>
         </tr>
       </thead>
-      <tbody *ngFor="let s of student">
+      <tbody *ngFor="let s of student |  paginate: { itemsPerPage: 20, currentPage: p }">
         <tr>
           <th>{{s.number}}</th>
           <td>{{s.id_student}}</td>
@@ -58,4 +58,5 @@
         </tr>
       </tbody>
     </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>

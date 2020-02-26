@@ -18,6 +18,8 @@ export class InfoComponent implements OnInit {
   showS: any = false;
   statusShow: any="ทั้งหมด";
 
+  p:number=1;
+
 
   constructor(private router: Router, private studentService: StudentService, private route: ActivatedRoute) {
 

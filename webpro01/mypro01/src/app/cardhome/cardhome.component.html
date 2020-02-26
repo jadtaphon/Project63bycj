@@ -17,9 +17,12 @@
     </div>
     <br>
     <div class="col-md-2">
-        <p>ชั้นเรียนทั้งหมด: {{numcourse}}</p>
+       
     </div>
-    <div class="col-md-10 container" [hidden]="!show">
+    <div class="col-md-12 container" [hidden]="!show">
+        <h4>ชั้นเรียนทั้งหมด: {{numcourse}}</h4>
+        <br>
+        <!-- <p>ชั้นเรียนทั้งหมด: {{numcourse}}</p> -->
         <app-card></app-card>
     </div>
 

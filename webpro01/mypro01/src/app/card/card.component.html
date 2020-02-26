@@ -1,37 +1,80 @@
-<div *ngFor="let c of course">
-  <div class="card"  >
-    <div class="card-header">
-      <div class="col">
-        <div ngbDropdown class="d-inline-block glyphicon glyphicon-align-justify">
-          <a class="" id="dropdownBasic1" ngbDropdownToggle>
-            เพิ่มเติม
-          </a>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <a ngbDropdownItem (click)="pageup(c.id)">อัพเดทชื่อ</a>
-            <a ngbDropdownItem (click)="pageinfoname(c.id)">ประวัติ</a>
+<div class="row">
+  <div class="col-md-3" style="text-align: center;"><label class="text-center">
+      <h5>ค้นหาวิชา</h5>
+    </label></div>
+  <div class="col-md-4"><input type="text" class="form-control" placeholder="รหัสวิชา" [(ngModel)]="search" /></div>
+</div>
+<br>
+
+<div class="row">
+  <div *ngFor="let c of course | cardFilter :search" class="col-md-6">
+    <div class="card mb-2" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-2">
+          <a class="btn btn-block btnqr" (click)="pageqr(c.id,c.course_id)" style="color:white;">QRcode</a>
+          <a (click)="delete(c.id)" class="btn btndenger" style="color:white;">ลบ</a>
+         
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h4 class="card-title">{{sfc(c.course_id)}}</h4>
+              </div>
+              <div class="col-md-6 text-right">
+                <div ngbDropdown class="d-inline-block glyphicon glyphicon-align-justify">
+                  <a class="" id="dropdownBasic1" role="button" ngbDropdownToggle>เพิ่มเติม</a>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <a ngbDropdownItem (click)="pageup(c.id)">อัพเดทชื่อ</a>
+                    <a ngbDropdownItem (click)="pageinfoname(c.id)">ประวัติ</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="card-text">{{sfn(c.course_name)}}</p>
+            <p class="card-text">เทอม : {{c.seson}}</p>
+            <p class="card-text"><small class="text-muted">เวลาเริ่มสอน : {{c.time}}</small></p>
           </div>
         </div>
       </div>
     </div>
-    <div class="card-body">
-      <div class="row container">
-        <div class="col-md-12">
-           <h5 class="card-title">รหัสวิชา : {{c.course_id}} <br> ชื่อวิชา : {{c.course_name}} </h5>
-           <p class="card-text">เวลาเริ่มสอน : {{c.time}}</p>
-           <p class="card-text">เทอม : {{c.seson}}</p>
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-md-3">
-           <a class="btn btn-success btn-block" (click)="pageqr(c.id,c.course_id)" style="color:white;">QRcode</a>
-        </div>
-        <div class="col-md-3"><a class="btn btn-info btn-block" (click)="pageinfo(c.id)" style="color:white;">จัดการนักศึกษา</a></div>
-        <div class="col-md-6 text-right">
-            <a (click)="delete(c.id)" class="btn btn-danger" style="color:white;">ลบ</a>
-        </div>
-      </div>
-    </div>
+    <!-- <div class="card">
+       <div class="card-header">
+         <div class="col-md-6">
+           <div ngbDropdown class="d-inline-block glyphicon glyphicon-align-justify">
+             <a class="" id="dropdownBasic1" ngbDropdownToggle>
+               เพิ่มเติม
+             </a>
+             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+               <a ngbDropdownItem (click)="pageup(c.id)">อัพเดทชื่อ</a>
+               <a ngbDropdownItem (click)="pageinfoname(c.id)">ประวัติ</a>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="card-body">
+         <div class="row container">
+           <div class="col-md-12">
+             <h5 class="card-title">รหัสวิชา : {{c.course_id}} <br> ชื่อวิชา : {{c.course_name}} </h5>
+             <p class="card-text">เวลาเริ่มสอน : {{c.time}}</p>
+             <p class="card-text">เทอม : {{c.seson}}</p>
+           </div>
+         </div>
+         <br>
+         <div class="row">
+           <div class="col-md-4">
+             <a class="btn btn-success btn-block" (click)="pageqr(c.id,c.course_id)" style="color:white;">QRcode</a>
+           </div>
+           <div class="col-md-5"><a class="btn btn-info btn-block" (click)="pageinfo(c.id)"
+               style="color:white;">จัดการนักศึกษา</a></div>
+           <div class="col-md-3 text-right">
+             <a (click)="delete(c.id)" class="btn btn-danger" style="color:white;">ลบ</a>
+           </div>
+         </div>
+       </div>
+     </div>
+   -->
+    <br>
   </div>
-  <br>
+
 </div>

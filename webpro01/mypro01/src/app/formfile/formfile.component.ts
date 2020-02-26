@@ -25,6 +25,8 @@ export class FormfileComponent implements OnInit {
   //classroom:any;
   time: any;
 
+  p:number=1;
+
   constructor(private router: Router, private studentService: StudentService) { }
 
   ngOnInit() {
@@ -57,7 +59,6 @@ export class FormfileComponent implements OnInit {
           this.student[i - 9]['number'] = this.data[i][1];
           this.student[i - 9]['id_student'] = this.data[i][2];
           this.student[i - 9]['name'] = this.data[i][3];
-
         }
         this.student[i - 9].splice(0)
       }
@@ -69,7 +70,6 @@ export class FormfileComponent implements OnInit {
     } catch (error) {
       alert('fire ไม่ถูกต้อง')
     }
-    
   }
 
   upload(seson:number) {
@@ -102,6 +102,5 @@ export class FormfileComponent implements OnInit {
         }
     }
   }
-
 
 }

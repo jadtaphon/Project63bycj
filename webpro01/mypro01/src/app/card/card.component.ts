@@ -9,6 +9,7 @@ import { Local } from 'protractor/built/driverProviders';
 })
 export class CardComponent implements OnInit {
   course: any
+  p:number=1;
   constructor(private router: Router, private studentService: StudentService) { }
 
   ngOnInit() {
@@ -16,15 +17,13 @@ export class CardComponent implements OnInit {
       (res) => {
       this.course = res
     });
+
+    
   }
   delete(id:any){
      this.studentService.deleteCourse(id).subscribe(
      ()=>{
       window.location.reload();
-      // this.studentService.getStudent().subscribe(
-      //   (res) => {
-      //   this.course = res
-      // });
        }
      )
     
@@ -46,6 +45,18 @@ export class CardComponent implements OnInit {
   }
   pageinfoname(id:any){
     this.router.navigate(['infoname/'+id])
+  }
+  
+  sfc(data) {
+
+    data = data.split('-').shift();
+    return data
+  }
+  sfn(data){
+    var va= data.split(' ').shift();
+    var va1 = data.split(' ').slice()[6];
+    var va2 = data.split(' ').slice()[8];
+    return va+" "+va1+" "+va2
   }
  
 

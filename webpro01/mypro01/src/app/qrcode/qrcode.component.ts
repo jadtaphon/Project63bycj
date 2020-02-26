@@ -155,6 +155,8 @@ export class QrcodeComponent implements OnInit {
   qrcode(content,getKey:any) {
     this.modalService.open(content, { size: 'xl', backdropClass: 'light-blue-backdrop' });
     this.qrcode_url = 'https://testmypro-01.herokuapp.com/getKey/' + getKey;
+    console.log(this.qrcode_url);
+    
   }
   
 

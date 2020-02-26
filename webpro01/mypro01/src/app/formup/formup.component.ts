@@ -35,7 +35,7 @@ export class FormupComponent implements OnInit {
     var name = namef + " " + namel
     this.number += 1;
     this.studentService.addstudent(this.idcoure, idstudent, name, this.number).subscribe(
-      () => { 
+      () => {
         alert("status OK")
         this.studentService.reportCourse(this.idcoure).subscribe(
           (data) => {
@@ -43,7 +43,7 @@ export class FormupComponent implements OnInit {
           }
         )
         document.getElementById('close1').click()
-       }
+      }
     )
   }
   editstudent(idstudent: any, name: any, number: any) {
@@ -61,7 +61,7 @@ export class FormupComponent implements OnInit {
   }
   delete(id: any) {
     this.studentService.deletestudent(this.idcoure, id).subscribe(
-      ()=>{
+      () => {
         this.studentService.reportCourse(this.idcoure).subscribe(
           (data) => {
             this.course = data[0];

@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="text-center">Update Student</h1>
-
+  <br>
   <div class="container">
     <button [hidden]="showB" class="btn-lg btn-block btn-info" (click)="show()" style="line-height: 1.5;">เพิ่ม
       นักศึกษา</button>
@@ -29,7 +29,16 @@
 
     <br>
   </div>
-  
+  <br>
+  <div class="row">
+    <div class="col-md-3" style="text-align: center;"><label class="text-center">
+        <h5>ค้นหา</h5>
+      </label></div>
+    <div class="col-md-4"><input type="text" class="form-control" placeholder="รหัสนักศึกษา" [(ngModel)]="search" />
+    </div>
+  </div>
+  <br>
+
   <table class="table">
     <thead>
       <tr>
@@ -40,7 +49,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let s of course.students">
+      <tr *ngFor="let s of course.students | formFilter:search ">
         <td class="text-center">{{s.number_id}}</td>
         <td>{{s.id_student}}</td>
         <td>{{s.name}}</td>
@@ -53,7 +62,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body" >
+          <div class="modal-body">
             <div class="row">
               <div class="col-3">
                 <label for="">รหัส นักศึกษา</label>
@@ -66,14 +75,15 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light" (click)="editstudent(idstudent.value,name.value,s.number_id)">save</button>
+            <button type="button" class="btn btn-light"
+              (click)="editstudent(idstudent.value,name.value,s.number_id)">save</button>
             <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
           </div>
         </ng-template>
       </tr>
     </tbody>
   </table>
-  
+
   <div class="text-right">
     <button class="btn btn-primary" [routerLink]="['/']">กลับ</button>
   </div>

@@ -10,11 +10,13 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./infoname.component.scss']
 })
 export class InfonameComponent implements OnInit {
-  course: object;
+  course: any;
   show: any = false;
   dataStrings: any;
   datagetweek:any=16;
   id: any;
+  count:number=5;
+  p: number = 1;
 
   constructor(private router: Router, private studentService: StudentService, private route: ActivatedRoute, private excelService: ExcelService, private modalService: NgbModal) { }
 

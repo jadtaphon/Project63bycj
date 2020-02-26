@@ -54,7 +54,7 @@
 
     </thead>
     <tbody>
-      <tr *ngFor="let s of course.students | studentFilter:[{week:twee},{status:statusShow}]" >
+      <tr *ngFor="let s of course.students | studentFilter:[{week:twee},{status:statusShow}]  | paginate: { itemsPerPage: 20, currentPage: p }"  >
         <td class="text-center">{{s.number_id}}</td>
         <td>{{s.id_student}}</td>
         <td>{{s.name}}</td>
@@ -68,6 +68,7 @@
       </tr>
     </tbody>
   </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
   <div class="text-right">
     <a class="btn btn-primary" [routerLink]="['/']" style="color: white;">กลับ</a>
   </div>

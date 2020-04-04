@@ -1,126 +1,130 @@
-<div class="container">
-  <h1 class="text-center">Start QRcode</h1>
-  <br>
-  <br>
-  <div class="text-center" *ngIf="!draw2cards">
-    <div class="row">
-      <div class="col-md-2">
-        <div class="form-group">
-          <label for="selete">เลือกอาทิต</label>
-          <select class="form-control" #weeks name="weeks" id="selete" style="width: 100%;">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label for="selete">setting time</label>
-          <select class="form-control" #times name="times" id="selete" style="width: 100%;">
-            <option value="60">5</option>
-            <option value="600">10</option>
-            <option value="900">15</option>
-            <option value="1200">20</option>
-            <option value="1500">25</option>
-            <option value="1800">30</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <br>
-        <button type="button" class="btn btn-info btn-lg text-center"
-          (click)="student(weeks.value,times.value,content); timerSrarted$.next(true);">Start QR
-          code</button>
-      </div>
-
-    </div>
-
-    <ng-template #content let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title text-center">สัปดาห์ที่{{weeks.value}}</h4>
-        <a type="button" class="close" aria-label="Close" id="close"
-          (click)="timerSrarted$.next(false); modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </a>
-      </div>
-      <div class="modal-body">
-        <div class="text-center">
-          <!-- <p>week at {{weeks.value}}</p> -->
-          <h1>
-            <countdown #countdown [config]="{leftTime: time, demand: ti}">$!m!:$!s!</countdown>
-          </h1>
-        </div>
-        <div class="container col-md-8">
-          <ngx-qrcode 
-            [qrc-value]="qrcode_url" 
-            qrc-element-type="url" 
-            qrc-class="aclass" 
-            qrc-errorCorrectionLevel="L"
-            qrc-scanQrcode="timeqrcode"
-            
-            >
-          </ngx-qrcode>
-        </div>
-      </div>
-    </ng-template>
-  </div>
-  <div [hidden]="show">
-    <p class="text-center"><button class="btn btn-outline-secondary" (click)="fixinfo()" type="button">จัดการ
-        นศ</button></p>
-    <br>
-    <!-- <button (click)="test()">test</button> -->
-    <br>
-    <button class="btn btn-secondary" (click)="reset()">รีเซ็ต</button>
-    <!-- <button (click)="getlocaltion()">getlocals</button> -->
-    <div class="text-center" id="reload_page">
-      <p>{{contcome}}/{{cont}}</p>
-    </div>
-    <table class="table table-bordered">
-      <thead>
-        <tr class="text-center">
-          <th scope="col">เลขที่</th>
-          <th scope="col">รหัสนักศึกษา</th>
-          <th scope="col">ชื่อ</th>
-          <th scope="col">คะแนน</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let s of showstudent ">
-          <td class="text-center">{{s.number_id}}</td>
-          <td class="text-center">{{s.id_student}}</td>
-          <td>{{s.name}}</td>
-          <td class="text-center">{{ getTotal(s.weeks) }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="grid-container">
+  <h1 class="mat-h1">Start QRcode</h1>
 </div>
+<div class="container">
 
-
-<!-- <div></div> -->
-<!-- <script>
-  $('#reload_page').DataTable({
-    ajax: "data.json"
-  });
-
-  setInterval(function () {
-    table.ajax.reload();
-  }, 3000)
-  console.log('hello');
-
-</script> -->
+    <br>
+    <br>
+    <div class="text-center" *ngIf="!draw2cards">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="selete">เลือกอาทิต</label>
+            <select class="form-control" #weeks name="weeks" id="selete" style="width: 100%;">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="selete">setting time</label>
+            <select class="form-control" #times name="times" id="selete" style="width: 100%;">
+              <option value="60">5</option>
+              <option value="600">10</option>
+              <option value="900">15</option>
+              <option value="1200">20</option>
+              <option value="1500">25</option>
+              <option value="1800">30</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <br>
+          <button type="button" class="btn btn-info btn-lg text-center"
+            (click)="Start(weeks.value,times.value,content); timerSrarted$.next(true);">Start QR
+            code</button>
+        </div>
+  
+      </div>
+  
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title text-center">สัปดาห์ที่{{weeks.value}}</h4>
+          <a type="button" class="close" aria-label="Close" id="close"
+            (click)="timerSrarted$.next(false); modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </a>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <!-- <p>week at {{weeks.value}}</p> -->
+            <h1>
+              <countdown #countdown [config]="{leftTime: time, demand: ti}">$!m!:$!s!</countdown>
+            </h1>
+          </div>
+          <div class="text-center">
+            <qr-code [value]="qrcode_url" [size]="500" [level]="L"></qr-code>
+            <!-- <ngx-qrcode 
+              [qrc-value]="qrcode_url" 
+              qrc-element-type="url" 
+              qrc-class="aclass" 
+              qrc-errorCorrectionLevel="L"
+              qrc-scanQrcode="timeqrcode"
+              >
+            </ngx-qrcode> -->
+          </div>
+          <br>
+        </div>
+      </ng-template>
+    </div>
+    <div [hidden]="show">
+      <p class="text-center"><button class="btn btn-outline-secondary" (click)="fixinfo()" type="button">จัดการ
+          นศ</button></p>
+      <br>
+      <!-- <button (click)="test()">test</button> -->
+      <br>
+      <button class="btn btn-secondary" (click)="reset()">รีเซ็ต</button>
+      <!-- <button (click)="getlocaltion()">getlocals</button> -->
+      <div class="text-center" id="reload_page">
+        <p>{{contcome}}/{{cont}}</p>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">เลขที่</th>
+            <th scope="col">รหัสนักศึกษา</th>
+            <th scope="col">ชื่อ</th>
+            <th scope="col">คะแนน</th>
+  
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of showstudent ">
+            <td class="text-center">{{s.number_id}}</td>
+            <td class="text-center">{{s.id_student}}</td>
+            <td>{{s.name}}</td>
+            <td class="text-center">{{ getTotal(s.weeks) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+  <!-- <div></div> -->
+  <!-- <script>
+    $('#reload_page').DataTable({
+      ajax: "data.json"
+    });
+  
+    setInterval(function () {
+      table.ajax.reload();
+    }, 3000)
+    console.log('hello');
+  
+  </script> -->

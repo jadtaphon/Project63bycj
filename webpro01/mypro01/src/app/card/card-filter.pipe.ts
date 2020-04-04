@@ -10,9 +10,6 @@ export class CardFilterPipe implements PipeTransform{
         if(!card||!idcard){
             return card
         }
-        console.log(card);
-        
-
         return card.filter(res => res.course_id.toLowerCase().indexOf(idcard.toLowerCase()) !==-1);
     }
 }

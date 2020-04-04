@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { StudentService } from '../services/student.service';
-import * as $ from "jquery"
 
 @Component({
   selector: 'app-info',
   templateUrl: './info.component.html',
-  styleUrls: ['./info.component.scss']
+  styleUrls: ['./info.component.css']
 })
 export class InfoComponent implements OnInit {
-
   course: any;
   //courseShow: any;
   idcoure: any;
@@ -19,12 +17,9 @@ export class InfoComponent implements OnInit {
   statusShow: any="ทั้งหมด";
 
   p:number=1;
+  constructor(private router: Router, private studentService: StudentService, private route: ActivatedRoute) { }
 
-
-  constructor(private router: Router, private studentService: StudentService, private route: ActivatedRoute) {
-
-  }
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.idcoure = params.get('id').split(',').shift();
       this.twee = params.get('id').split(',').slice()[1];
@@ -39,6 +34,7 @@ export class InfoComponent implements OnInit {
         this.course = data[0];
       });
   }
+
   student(weeks: any,status:any) {
     
     this.twee = weeks;

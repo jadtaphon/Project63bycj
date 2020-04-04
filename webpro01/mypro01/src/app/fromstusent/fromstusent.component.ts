@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { StudentService } from '../services/student.service';
+
 @Component({
   selector: 'app-fromstusent',
   templateUrl: './fromstusent.component.html',
-  styleUrls: ['./fromstusent.component.scss']
+  styleUrls: ['./fromstusent.component.css']
 })
 export class FromstusentComponent implements OnInit {
-  
+
   course: any;
   idcoure: any;
   weeks: any;
@@ -15,7 +16,7 @@ export class FromstusentComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.idcoure = params.get('id').split(',').shift();
       this.weeks = params.get('id').split(',').slice()[1];
@@ -23,6 +24,10 @@ export class FromstusentComponent implements OnInit {
 
     var coure = localStorage.getItem('idcoure');
     var weekc = localStorage.getItem('week');
+
+    
+    
+    
 
       if (coure == this.idcoure) {
         if (weekc == this.weeks) {
@@ -36,14 +41,13 @@ export class FromstusentComponent implements OnInit {
       (data) => {
         this.course = data[0];
       });
-
-
   }
+
   submid(sutdent: any) {
     var coure = localStorage.getItem('idcoure');
     var weekc = localStorage.getItem('week');
     var checkid = localStorage.getItem('id_active');
-
+    
     var between = this.getlocaltion();
     if (between <= 150) {
       this.checknamesad(sutdent, coure, weekc, checkid);
@@ -52,7 +56,10 @@ export class FromstusentComponent implements OnInit {
     }
   }
   checknamesad(sutdent: any, coure: any, weekc: any, checkid: any) {
+    
+    
     if (sutdent != "") {
+      console.log(sutdent+"check");
       if (coure == this.idcoure) {
         if (weekc == this.weeks) {
           for (let index = 0; index < this.course.students.length; index++) {
@@ -79,6 +86,8 @@ export class FromstusentComponent implements OnInit {
         check = true;
       }
     }
+    console.log(check);
+    
 
     if (check) {
       this.studentService.chakname(this.idcoure, sutdent, this.weeks).subscribe(
@@ -124,5 +133,5 @@ export class FromstusentComponent implements OnInit {
   degreesToRadians(degrees: any) {
     return degrees * Math.PI / 180;
   }
-}
 
+}

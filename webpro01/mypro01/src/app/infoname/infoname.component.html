@@ -1,177 +1,180 @@
-<div class="container" *ngIf="course">
-  <h1 class="text-center">Classroom record</h1>
-  <div class="row">
-    <div class="col-md-6">
-      <p>รหัสวิชา : {{course.course_id}}</p>
-      <p>ชื่อวิชา : {{course.course_name}}</p>
-      <p>เวลา : {{course.time}}</p>
-    </div>
-    <div class="col-md-6 text-right">
-      <br>
-      <br>
-      <br>
-      <button class="btn btn-success" (click)="downloadfile()">Download File</button>
-      .
-      <button class="btn btn-secondary" (click)="showsumfile(content)">รวมคะแนน</button>
-    </div>
-  </div>
-  <div class="container mt-5">
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th scope="col" class="text-center">เลขที่</th>
-            <th scope="col" class="text-center">รหัสนักศึกษา</th>
-            <th scope="col" class="text-center">ชื่อ</th>
-            <th colspan="16" class="text-center">สัปดาห์</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let s of course.students |  paginate: { itemsPerPage: 20, currentPage: p } ">
-            <td class="text-center">{{s.number_id}}</td>
-            <td>{{s.id_student}}</td>
-            <td>{{s.name}}</td>
-            <!-- <td style="padding: 0.05rem;" class="text-center"> -->
-            <td>
-              <span>{{s.weeks.week1.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week2.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week3.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week4.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week5.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week6.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week7.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week8.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week9.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week10.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week11.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week12.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week13.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week14.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week15.week}}</span>
-            </td>
-            <td>
-              <span>{{s.weeks.week16.week}}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  <div class="text-right">
-    <a class="btn btn-primary" [routerLink]="['/']" style="color: white;">กลับ</a>
-  </div>
-  <br>
+<div class="grid-container">
+  <h1 class="mat-h1">Classroom record</h1>
 </div>
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <input class="btn btn-info " type="file" (change)="readfile($event)" multiple="false" />
-    <p>รวมคะแนน&hellip;</p>
-    <div class="container mt-10">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col" class="text-center">เลขที่</th>
-            <th scope="col" class="text-center">รหัสนักศึกษา</th>
-            <th scope="col" class="text-center">ชื่อ</th>
-            <th colspan="16" class="text-center">คะแนนรวม</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let s of dataStrings">
-            <td class="text-center">{{s.number_id}}</td>
-            <td>{{s.id_student}}</td>
-            <td>{{s.name}}</td>
-            <td>
-              <span>{{s.week1}}</span>
-            </td>
-            <td>
-              <span>{{s.week2}}</span>
-            </td>
-            <td>
-              <span>{{s.week3}}</span>
-            </td>
-            <td>
-              <span>{{s.week4}}</span>
-            </td>
-            <td>
-              <span>{{s.week5}}</span>
-            </td>
-            <td>
-              <span>{{s.week6}}</span>
-            </td>
-            <td>
-              <span>{{s.week7}}</span>
-            </td>
-            <td>
-              <span>{{s.week8}}</span>
-            </td>
-            <td>
-              <span>{{s.week9}}</span>
-            </td>
-            <td>
-              <span>{{s.week10}}</span>
-            </td>
-            <td>
-              <span>{{s.week11}}</span>
-            </td>
-            <td>
-              <span>{{s.week12}}</span>
-            </td>
-            <td>
-              <span>{{s.week13}}</span>
-            </td>
-            <td>
-              <span>{{s.week14}}</span>
-            </td>
-            <td>
-              <span>{{s.week15}}</span>
-            </td>
-            <td>
-              <span>{{s.week16}}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container" *ngIf="course">
+    
+    <div class="row">
+      <div class="col-md-6">
+        <p>รหัสวิชา : {{course.course_id}}</p>
+        <p>ชื่อวิชา : {{course.course_name}}</p>
+        <p>เวลา : {{course.time}}</p>
+      </div>
+      <div class="col-md-6 text-right">
+        <br>
+        <br>
+        <br>
+        <button class="btn btn-success" (click)="downloadfile()">Download File</button>
+        .
+        <button class="btn btn-secondary" (click)="showsumfile(content)">รวมคะแนน</button>
+      </div>
     </div>
+    <div class="container mt-5">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center">เลขที่</th>
+              <th scope="col" class="text-center">รหัสนักศึกษา</th>
+              <th scope="col" class="text-center">ชื่อ</th>
+              <th colspan="16" class="text-center">สัปดาห์</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of course.students |  paginate: { itemsPerPage: 20, currentPage: p } ">
+              <td class="text-center">{{s.number_id}}</td>
+              <td>{{s.id_student}}</td>
+              <td>{{s.name}}</td>
+              <!-- <td style="padding: 0.05rem;" class="text-center"> -->
+              <td>
+                <span>{{s.weeks.week1.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week2.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week3.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week4.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week5.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week6.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week7.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week8.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week9.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week10.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week11.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week12.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week13.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week14.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week15.week}}</span>
+              </td>
+              <td>
+                <span>{{s.weeks.week16.week}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <div class="text-right">
+      <a class="btn btn-primary" [routerLink]="['/']" style="color: white;">กลับ</a>
+    </div>
+    <br>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="totle_score()">save</button>
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-  </div>
-</ng-template>
+  
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">รวมคะแนน</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input class="btn btn-info " type="file" (change)="readfile($event)" multiple="false" />
+      <p>รวมคะแนน&hellip;</p>
+      <div class="container mt-10">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center">เลขที่</th>
+              <th scope="col" class="text-center">รหัสนักศึกษา</th>
+              <th scope="col" class="text-center">ชื่อ</th>
+              <th colspan="16" class="text-center">คะแนนรวม</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of dataStrings">
+              <td class="text-center">{{s.number_id}}</td>
+              <td>{{s.id_student}}</td>
+              <td>{{s.name}}</td>
+              <td>
+                <span>{{s.week1}}</span>
+              </td>
+              <td>
+                <span>{{s.week2}}</span>
+              </td>
+              <td>
+                <span>{{s.week3}}</span>
+              </td>
+              <td>
+                <span>{{s.week4}}</span>
+              </td>
+              <td>
+                <span>{{s.week5}}</span>
+              </td>
+              <td>
+                <span>{{s.week6}}</span>
+              </td>
+              <td>
+                <span>{{s.week7}}</span>
+              </td>
+              <td>
+                <span>{{s.week8}}</span>
+              </td>
+              <td>
+                <span>{{s.week9}}</span>
+              </td>
+              <td>
+                <span>{{s.week10}}</span>
+              </td>
+              <td>
+                <span>{{s.week11}}</span>
+              </td>
+              <td>
+                <span>{{s.week12}}</span>
+              </td>
+              <td>
+                <span>{{s.week13}}</span>
+              </td>
+              <td>
+                <span>{{s.week14}}</span>
+              </td>
+              <td>
+                <span>{{s.week15}}</span>
+              </td>
+              <td>
+                <span>{{s.week16}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="totle_score()">save</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>

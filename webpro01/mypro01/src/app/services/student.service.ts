@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Local } from 'protractor/built/driverProviders';
 import { SocketService } from '../services/socket.service';
 import { Subject } from 'rxjs';
-import { delay, map } from 'rxjs/operators'
+import { delay, map } from 'rxjs/operators';
 
 const SOCKET_URL = "ws://10.0.0.27:443/ws";
 
@@ -15,7 +15,7 @@ export interface Message {
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService implements OnInit {
+export class StudentService {
 
   Localtion: any = []
   apiURL: string
@@ -45,17 +45,9 @@ export class StudentService implements OnInit {
 
     //this.apiURL = 'http://10.35.1.89:443';
     this.apiURL = 'http://10.0.0.27:443'
-  }
-  ngOnInit() {
-    //  this.httpClient.get('http://localhost:443/getIP').subscribe(
-    //   (data)=>{
-    //     this.apiURL='http://'+data.toString()+':443';
-    //     console.log(this.apiURL);
-    //   }
-    // )
-  }
+   }
 
-  getStudent() {
+   getStudent() {
     return this.httpClient.get(`${this.apiURL}/getCourse`);
   }
   getIP() {
@@ -125,4 +117,5 @@ export class StudentService implements OnInit {
   ferseh() {
 
   }
+
 }

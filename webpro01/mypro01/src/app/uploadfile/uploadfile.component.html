@@ -1,0 +1,51 @@
+<div class="grid-container">
+  <p></p>
+  <h1 class="mat-h1">New Classroom</h1>
+ </div>
+ <div class="container"> 
+     
+    <hr>
+    <div class="form-group">
+      <input class="btn btn-info " type="file" (change)="onFileChange($event)" multiple="false" />
+      <br>
+      <br>
+      <div class="row">
+        
+        <div class="col-md-6"></div>
+        <div class="input-group col-md-4">
+        </div>
+        <div class="col-md-2 container">
+            <select class="form-control" #seson name="seson" id="">
+              <option selected>เลือกเทอม</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+        </div>
+        <hr>
+      </div>
+      <p>รหัสวิชา :{{course_id}}</p>
+        <p>ชื่อวิชา : {{course_name}}</p>
+        <p>วันเวลาเรียน : {{time}}</p>
+      <div class="text-right">
+        <button class="btn btn-success " (click)="upload(seson.value)">Upload!</button>
+      </div>
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">เลขที่</th>
+            <th scope="col">รหัสนักศึกษา</th>
+            <th scope="col">ชื่อ-นานสกุล</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let s of student |  paginate: { itemsPerPage: 20, currentPage: p }">
+          <tr>
+            <th>{{s.number}}</th>
+            <td>{{s.id_student}}</td>
+            <td>{{s.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

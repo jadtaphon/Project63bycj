@@ -1,76 +1,80 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Classroom Info</h1>
+</div>
 <div class="container" *ngIf="course">
-  <h1 class="text-center">Classroom Info</h1>
-  <p>รหัสวิชา : {{course.course_id}}</p>
-  <p>ชื่อวิชา : {{course.course_name}}</p>
-  <p>เวลา : {{course.time}}</p>
-  <div class="col-md-6">
-    <div [hidden]="showS" class="input-group mb-3 text-right">
-      <div class="input-group-prepend">
-        <span class="input-group-text">เลือกอาทิตย์</span>
-      </div>
-      <select class="form-control" #weeks name="weeks" style="width: 20%;">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-      </select>
-      <div class="input-group-prepend">
-        <span class="input-group-text">ค้นหา</span>
-      </div>
-      <select class="form-control" #status name="status" style="width: 20%;">
-        <option selected>ทั้งหมด</option>
-        <option value="1">มา</option>
-        <option value="0.5">สาย</option>
-        <option value="0">ขาด</option>
-      </select>
-      <div class="input-group-append">
-        <button class="btn btn-secondary" (click)="student(weeks.value, status.value)">ok</button>
+
+    <p>รหัสวิชา : {{course.course_id}}</p>
+    <p>ชื่อวิชา : {{course.course_name}}</p>
+    <p>เวลา : {{course.time}}</p>
+    <div class="col-md-6">
+      <div [hidden]="showS" class="input-group mb-3 text-right">
+        <div class="input-group-prepend">
+          <span class="input-group-text">เลือกอาทิตย์</span>
+        </div>
+        <select class="form-control" #weeks name="weeks" style="width: 20%;">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+        </select>
+        <div class="input-group-prepend">
+          <span class="input-group-text">ค้นหา</span>
+        </div>
+        <select class="form-control" #status name="status" style="width: 20%;">
+          <option selected>ทั้งหมด</option>
+          <option value="1">มา</option>
+          <option value="0.5">สาย</option>
+          <option value="0">ขาด</option>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-secondary" (click)="student(weeks.value, status.value)">ok</button>
+        </div>
       </div>
     </div>
+    <br>
+  
+    <table class="table table-bordered">
+      <thead>
+        <tr class="text-center">
+          <th scope="col">เลขที่</th>
+          <th scope="col">รหัสนักศึกษา</th>
+          <th scope="col">ชื่อ</th>
+          <th colspan="4">สัปดาห์ที่ {{twee}}</th>
+          <th scope="col">รวม</th>
+        </tr>
+  
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of course.students | studentFilter:[{week:twee},{status:statusShow}]  | paginate: { itemsPerPage: 15, currentPage: p }"  >
+          <td class="text-center">{{s.number_id}}</td>
+          <td>{{s.id_student}}</td>
+          <td>{{s.name}}</td>
+          <td class="text-center" style="font-size: 1.2rem;">
+            <span >{{retest(s.weeks)}}</span>
+          </td>
+          <td class="text-center"><button class="btn-lg btn-block btn-info" id="click1" (click)="chackbyTcome(s.id_student,1)">มา</button></td>
+          <td class="text-center"><button class="btn-lg btn-block btn-warning" (click)="chackbyTlast(s.id_student,0.5)">สาย</button></td>
+          <td class="text-center"><button class="btn-lg btn-block btn-danger" id="click1" (click)="chackbyOut(s.id_student,1)">ขาด</button></td>
+          <td class="text-center" style="font-size: 1.2rem;">{{getTotal(s.weeks) }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <div class="text-right">
+      <a class="btn btn-primary" [routerLink]="['/']" style="color: white;">กลับ</a>
+    </div>
+    <br>
   </div>
-  <br>
-
-  <table class="table table-bordered">
-    <thead>
-      <tr class="text-center">
-        <th scope="col">เลขที่</th>
-        <th scope="col">รหัสนักศึกษา</th>
-        <th scope="col">ชื่อ</th>
-        <th colspan="4">สัปดาห์ที่ {{twee}}</th>
-        <th scope="col">รวม</th>
-      </tr>
-
-    </thead>
-    <tbody>
-      <tr *ngFor="let s of course.students | studentFilter:[{week:twee},{status:statusShow}]  | paginate: { itemsPerPage: 20, currentPage: p }"  >
-        <td class="text-center">{{s.number_id}}</td>
-        <td>{{s.id_student}}</td>
-        <td>{{s.name}}</td>
-        <td class="text-center" style="font-size: 1.2rem;">
-          <span >{{retest(s.weeks)}}</span>
-        </td>
-        <td class="text-center"><button class="btn-lg btn-block btn-info" id="click1" (click)="chackbyTcome(s.id_student,1)">มา</button></td>
-        <td class="text-center"><button class="btn-lg btn-block btn-warning" (click)="chackbyTlast(s.id_student,0.5)">สาย</button></td>
-        <td class="text-center"><button class="btn-lg btn-block btn-danger" id="click1" (click)="chackbyOut(s.id_student,1)">ขาด</button></td>
-        <td class="text-center" style="font-size: 1.2rem;">{{getTotal(s.weeks) }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  <div class="text-right">
-    <a class="btn btn-primary" [routerLink]="['/']" style="color: white;">กลับ</a>
-  </div>
-  <br>
-</div>
+  

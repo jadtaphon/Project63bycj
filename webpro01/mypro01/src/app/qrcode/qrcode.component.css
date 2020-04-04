@@ -1,0 +1,12 @@
+.qr{
+    width: 100%;
+}
+
+
+::ng-deep .aclass img {
+    width: 100%;
+}
+
+.grid-container {
+    margin: 20px;
+  }

@@ -11,7 +11,7 @@ export class HerokuService {
 
   constructor(private httpClient: HttpClient) { }
 
-
+  
   getAll(){
     return this.httpClient.get(`${this.apiURL}/getAll`);
   }
@@ -35,7 +35,5 @@ export class HerokuService {
     Data.append("url",herokuUrl)
     return this.httpClient.post(`${this.apiURL}/updateqr`,Data)
   }
-
+  
 }
-
-

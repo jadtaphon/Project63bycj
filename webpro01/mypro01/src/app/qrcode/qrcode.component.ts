@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Router, ActivatedRoute } from '@angular/router'
 import { StudentService } from '../services/student.service';
 import { HerokuService } from '../services/heroku.service'
 import { interval, Subscription, Observable, BehaviorSubject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { takeWhile, tap } from 'rxjs/operators';
-
-
-
 @Component({
   selector: 'app-qrcode',
   templateUrl: './qrcode.component.html',
-  styleUrls: ['./qrcode.component.scss']
+  styleUrls: ['./qrcode.component.css']
 })
-
 export class QrcodeComponent implements OnInit {
+
   ////////////////localtion//////////////////////////////////////////
   [x: string]: any;
   qrcode_url = "";
@@ -46,7 +42,6 @@ export class QrcodeComponent implements OnInit {
 
   timeqrcode = true;
 
-
   constructor(private router: Router, private studentService: StudentService, private route: ActivatedRoute, private modalService: NgbModal, private herokuService: HerokuService) {
     studentService.messages.subscribe(msg => {
 
@@ -61,9 +56,9 @@ export class QrcodeComponent implements OnInit {
         //console.log(this.showstudent);
       }
     });
-  }
-  ///////////////////////////////////////////////////////////////
-  ngOnInit() {
+   }
+
+  ngOnInit(): void {
     this.studentService.getIP().subscribe(
       (data) => {
         this.ip = data;
@@ -99,7 +94,8 @@ export class QrcodeComponent implements OnInit {
     ).subscribe();
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   }
-  student(week: any, times: any, content) {
+
+  Start(week: any, times: any, content) {
     this.weeks = week;
     this.time = times;
     console.log(this.ip);
@@ -201,4 +197,6 @@ export class QrcodeComponent implements OnInit {
   ngOnDestroy() {
     this.isAlive = false;
   }
+  
+
 }

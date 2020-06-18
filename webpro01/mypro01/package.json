@@ -24,7 +24,7 @@
     "@angular/router": "~9.0.2",
     "@ng-bootstrap/ng-bootstrap": "^6.0.0",
     "@types/jquery": "^3.3.33",
-    "angular": "^1.7.9",
+    "angular": "^1.8.0",
     "angular-js-xlsx": "0.0.3",
     "angular2-qrcode": "^2.0.3",
     "bootstrap": "^4.4.1",
